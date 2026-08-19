@@ -22,7 +22,7 @@
 
 ## Exemplos resolvidos do slide
 
-**Ex. 1 (pág. 16) — Inversão por operações elementares** (método `[A | I] → [I | A⁻¹]`):
+**Ex. 1 (págs. 16–17) — Inversão por operações elementares** (método `[A | I] → [I | A⁻¹]`; o exemplo começa na pág. 16 e termina na pág. 17):
 
 ```
        2  1  3 | 1  0  0
