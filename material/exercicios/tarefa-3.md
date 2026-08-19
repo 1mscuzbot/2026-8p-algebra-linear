@@ -7,12 +7,12 @@
 ```
             -3   4  -5
       B =  | 0   1   2 |
-            3  -5   4
+             3  -5   4
 
-            1  0  0  0
-            2  1  0  0
+             1  0  0  0
+             2  1  0  0
       C =  | 3  2  1  0 |        (triangular inferior, diagonal = 1)
-            4  3  2  1
+             4  3  2  1
 
             -3  -1  -3
       L =  | 2  -4  -1 |
@@ -46,9 +46,9 @@ Toda operação aplicada à esquerda também vale à direita, até a esquerda vi
 **L₁ ← L₁·(−1/3)**:
 
 ```
-[  1  −4/3   5/3  | −1/3   0   0 ]
-[  0   1     2    |  0     1   0 ]
-[  3  −5     4    |  0     0   1 ]
+[  1 −4/3 5/3  | −1/3   0   0 ]
+[  0   1   2   |   0    1   0 ]
+[  3  −5   4   |   0    0   1 ]
 ```
 
 ### Passo 3 — Zerar abaixo do 1º pivot
@@ -56,9 +56,9 @@ Toda operação aplicada à esquerda também vale à direita, até a esquerda vi
 **L₃ ← L₃ + L₁·(−3)**: L₃ = `[0, −1, −1 | 1, 0, 1]`
 
 ```
-[  1  −4/3   5/3  | −1/3   0   0 ]
-[  0   1     2    |  0     1   0 ]
-[  0  −1    −1    |  1     0   1 ]
+[  1 −4/3  5/3  | −1/3  0   0 ]
+[  0   1    2   |   0   1   0 ]
+[  0  −1   −1   |   1   0   1 ]
 ```
 
 ### Passo 4 — Zerar abaixo do 2º pivot
@@ -66,9 +66,9 @@ Toda operação aplicada à esquerda também vale à direita, até a esquerda vi
 **L₃ ← L₃ + L₂·(1)**: L₃ = `[0, 0, 1 | 1, 1, 1]`
 
 ```
-[  1  −4/3   5/3  | −1/3   0   0 ]
-[  0   1     2    |  0     1   0 ]
-[  0   0     1    |  1     1   1 ]
+[  1 −4/3 5/3  |−1/3  0   0 ]
+[  0   1   2   |  0   1   0 ]
+[  0   0   1   |  1   1   1 ]
 ```
 
 ### Passo 5 — Zerar acima da diagonal (subida)
@@ -80,9 +80,9 @@ Toda operação aplicada à esquerda também vale à direita, até a esquerda vi
 **L₁ ← L₁ + L₃·(−5/3)**: L₁ = `[1, 0, 0 | −3−5/3, 4/3−5/3, −8/3−5/3]`
 
 ```
-[  1   0   0  | −14/3   −3   −13/3 ]
-[  0   1   0  |  −2     −1    −2   ]
-[  0   0   1  |   1      1     1   ]
+[  1   0   0  | −14/3  −3  −13/3 ]
+[  0   1   0  |  −2    −1   −2   ]
+[  0   0   1  |   1     1    1   ]
 ```
 
 ### Resultado e conferência
@@ -110,7 +110,7 @@ L₄ ← L₄ + L₁·(−4):  [ 0  3  2  1 | −4  0  0  1 ]
 L₃ ← L₃ + L₂·(−2):  [ 0  0  1  0 |  1  −2  1  0 ]
 L₄ ← L₄ + L₂·(−3):  [ 0  0  2  1 |  2  −3  0  1 ]
 
-L₄ ← L₄ + L₃·(−2):  [ 0  0  0  1 |  0   1  −2  1 ]
+L₄ ← L₄ + L₃·(−2):  [ 0  0  0  1 |  0   1 −2  1 ]
 ```
 
 ### Resultado e conferência
