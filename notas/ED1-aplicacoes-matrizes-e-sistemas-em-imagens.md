@@ -45,8 +45,34 @@ Imagem digital m×n = **matriz m×n** em que cada elemento é um **pixel** com v
 - Concluir: "matrizes armazenam e transformam imagens; sistemas lineares resolvem dependências entre os canais de cor".
 - Bibliografia: STEINBRUCH & WINTERLE (Álgebra Linear), GONZALEZ & WOODS (Processamento de Imagens Digitais), slides das duas disciplinas.
 
+## Exemplo real 3×3 (pronto para o slide)
+
+Imagem: **`abbey.bmp`** (456×342, RGB 24-bit) do repo de PDICG. O recorte abaixo é da **janela** da foto (coordenadas x = 314..316, y = 300..302, origem no canto superior esquerdo; leitura direta dos bytes do BMP com script Python, valores reais).
+
+**1) A imagem é UMA matriz por canal (3 matrizes 456×342):**
+
+```
+R = |196 184 201|        G = |188 171 189|        B = |177 162 177|
+    |110  85  89|            | 85  56  58|            | 80  52  55|
+    | 38  33  29|            | 41  39  39|            | 32  29  28|
+```
+
+**2) Tons de cinza = combinação linear dos canais (Aula 06):** `Y = 0,299·R + 0,587·G + 0,114·B`
+
+Exemplo do primeiro pixel (x=314, y=300): `Y = 0,299·196 + 0,587·188 + 0,114·177 ≈ 58,6 + 110,4 + 20,2 ≈ 189`
+
+```
+Y = |189 174 191|
+    | 92  64  67|
+    | 39  36  35|
+```
+
+Compare com o original: o canto superior tem valores claros (janela/claro), o inferior escuros (sombra da parede) — a matriz **guarda a forma da imagem**.
+
+**Como reproduzir:** abrir `abbey.bmp` com a `ImageClass` do projeto de PDICG e imprimir o trecho no terminal (ou reexecutar o script de leitura de BMP usado aqui). 
+
 ## Checklist de apresentação
-- [ ] Definir tamanho da matriz + 1 exemplo pequeno com números reais (ex.: imagem 3×3 → matriz 3×3)
+- [x] Definir tamanho da matriz + 1 exemplo pequeno com números reais (ex.: imagem 3×3 → matriz 3×3)
 - [ ] Mostrar 2–3 tabelas/figuras (matriz ↔ imagem)
 - [ ] Resolver UMA aplicação de sistema passo a passo (estilo Tarefa 5)
 - [ ] Rodar um programa OpenGL (ou Python) demonstrando transposta/espelho/zoom
