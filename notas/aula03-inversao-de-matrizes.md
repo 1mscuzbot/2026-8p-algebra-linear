@@ -9,11 +9,60 @@
 
 ## Resumo
 
-- **Matriz inversa** `A⁻¹`: matriz tal que `A·A⁻¹ = A⁻¹·A = Iₙ` (só existe para matriz **quadrada**).
-- **Condição de existência:** `det(A) ≠ 0` (se `det(A) = 0`, A é **singular** e não tem inversa).
+- **A.30 — Matriz inversa** `A⁻¹`: dada A quadrada de ordem n, se existir B quadrada de mesma ordem com **`A·B = B·A = Iₙ`**, B é a inversa de A: `A·A⁻¹ = A⁻¹·A = Iₙ` (só existe para matriz **quadrada**).
+- **A.31 — Matriz singular:** matriz quadrada com **`det(A) = 0`**. Ex.: `A = |1 4 7; 2 5 8; 3 6 9|` é singular pois det A = **0** (linhas 2 e 3 = 1ª linha + 1 e + 2 → dependentes) — não tem inversa.
+- **A.32 — Matriz não-singular (regular):** matriz quadrada com **`det(A) ≠ 0`**. Ex.: `A = |2 3 1; 5 2 2; 3 1 3|` é não-singular pois det A = 8 − 27 − 1 = **−20 ≠ 0** — tem inversa.
 - **Método ensinado em aula — operações elementares:** escrever `[A | Iₙ]` e aplicar operações de linha (trocar linhas, multiplicar por escalar, somar múltiplos de uma linha a outra) até obter `[Iₙ | A⁻¹]`.
-- Propriedades: `(A⁻¹)⁻¹ = A`, `(A·B)⁻¹ = B⁻¹·A⁻¹`, `(Aᵀ)⁻¹ = (A⁻¹)ᵀ`.
+- **Propriedades (A.33):** `(A⁻¹)⁻¹ = A`, `(Aᵀ)⁻¹ = (A⁻¹)ᵀ`, `(A·B)⁻¹ = B⁻¹·A⁻¹`; a inversa é **única**; `I⁻¹ = I` (det I = 1). Ex.: `A = |8 5; 3 2|` e `C = |2 −5; −3 8|` → `A·C = I` (C é a inversa de A).
+- **A.34 — Operações elementares (base do método de inversão):**
+  - **I)** Permutação de duas linhas (ou colunas);
+  - **II)** Multiplicação de todos os elementos de uma linha (coluna) por um número real **≠ 0**;
+  - **III)** Substituição dos elementos de uma linha (coluna) pela soma deles com os elementos correspondentes de outra linha (coluna) previamente multiplicados por um número real **≠ 0** (o mesmo tipo de operação da propriedade IX dos determinantes).
 - **Aplicação:** resolver `A·X = B` ⇒ `X = A⁻¹·B` (ponte para a Aula 04).
+
+## Exemplos resolvidos do slide
+
+**Ex. 1 (pág. 16) — Inversão por operações elementares** (método `[A | I] → [I | A⁻¹]`):
+
+```
+       2  1  3 | 1  0  0
+A =  | 4  2  2 | 0  1  0        (det A = 32 ≠ 0 → inversível)
+       2  5  3 | 0  0  1
+
+L₁ ← L₁·(1/2):    1  1/2  3/2 |  1/2  0   0
+                   4  2    2   |  0    1   0
+                   2  5    3   |  0    0   1
+
+L₂ ← L₂ + L₁·(−4):  1  1/2  3/2 |  1/2  0   0
+                     0  0   −4   | −2    1   0
+                     2  5    3   |  0    0   1
+
+L₃ ← L₃ + L₁·(−2):  1  1/2  3/2 |  1/2  0   0
+                     0  0   −4   | −2    1   0
+                     0  4    0   | −1    0   1
+
+L₂ ↔ L₃:             1  1/2  3/2 |  1/2  0   0
+                     0  4    0   | −1    0   1
+                     0  0   −4   | −2    1   0
+
+L₂ ← L₂·(1/4):       1  1/2  3/2 |  1/2  0    0
+                     0  1    0   | −1/4  0    1/4
+                     0  0   −4   | −2    1    0
+
+L₃ ← L₃·(−1/4):      1  1/2  3/2 |  1/2  0    0
+                     0  1    0   | −1/4  0    1/4
+                     0  0    1   |  1/2 −1/4  0
+
+L₁ ← L₁ + L₂·(−1/2): 1  0  3/2 |  5/8   0   −1/8
+                     0  1  0   | −1/4   0    1/4
+                     0  0  1   |  1/2  −1/4  0
+
+L₁ ← L₁ + L₃·(−3/2): 1  0  0 | −1/8   3/8  −1/8
+                     0  1  0 | −1/4   0     1/4
+                     0  0  1 |  1/2  −1/4   0
+```
+
+**A⁻¹ = `|−1/8  3/8  −1/8; −1/4  0  1/4; 1/2  −1/4  0`**, conferido: A·A⁻¹ = A⁻¹·A = I ✓. (Curiosidade: a pivotagem `L₂ ↔ L₃` foi necessária porque o 2º pivot caiu em 0, já que L₂↔L₃ traz −4.)
 
 ## Exercícios / Tarefas
 
