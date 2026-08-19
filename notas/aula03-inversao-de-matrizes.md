@@ -68,7 +68,7 @@ L₁ ← L₁ + L₃·(−3/2): 1  0  0 | −1/8   3/8  −1/8
 
 | Origem | O que fazer |
 |--------|-------------|
-| **Tarefa 3** | Calcular a matriz inversa **conforme o método ensinado em aula** (livro p. 499); alternativa: usar o aplicativo, **mostrando o passo a passo** (sugestão: Symbolab online) |
+| **Tarefa 3** | Calcular a matriz inversa **conforme o método ensinado em aula** (livro p. 499); alternativa: usar o aplicativo, **mostrando o passo a passo** (sugestão: Symbolab online). Resolvida ✓ → [tarefa-3.md](../material/exercicios/tarefa-3.md) (exercícios 5) B⁻¹, 6) C⁻¹ e 13) L⁻¹, com todas as inversas conferidas por B·B⁻¹ = I) |
 
 ---
 
