@@ -12,6 +12,23 @@
 - `projetos/` — trabalhos práticos
 - `notas/` — anotações e resumos
 
+## Notas de estudo (resumo por aula + exercícios)
+| Arquivo | Conteúdo |
+|---------|----------|
+| [aula01-matrizes.md](notas/aula01-matrizes.md) | Matrizes: definição, tipos, operações — Tarefa 1 (p. 393) |
+| [aula02-determinantes.md](notas/aula02-determinantes.md) | Determinantes (Sarrus, propriedades) — Tarefa 2 (Symbolab) |
+| [aula03-inversao-de-matrizes.md](notas/aula03-inversao-de-matrizes.md) | Inversão por operações elementares — Tarefa 3 (p. 499) |
+| [aula04-sistemas-de-equacoes-lineares.md](notas/aula04-sistemas-de-equacoes-lineares.md) | Sistemas lineares, forma matricial A·X=B — Tarefa 4 (p. 508) |
+| [aula05-problemas-com-sistemas-lineares.md](notas/aula05-problemas-com-sistemas-lineares.md) | Problemas aplicados (UEL, UEPG, ENEM, UNICAMP, UFPE) — Tarefa 5, com 1 exemplo resolvido |
+| [aula06-espacos-vetoriais-e-combinacao-linear.md](notas/aula06-espacos-vetoriais-e-combinacao-linear.md) | Espaços vetoriais, combinação linear — Tarefa 6 (p. 15, 39) |
+| [aula07-dependencia-e-independencia-linear.md](notas/aula07-dependencia-e-independencia-linear.md) | LI/LD, base e dimensão — Tarefa 7 (p. 90, ex. 47–48 com respostas) |
+| [aula08-transformacoes-lineares.md](notas/aula08-transformacoes-lineares.md) | TL, núcleo e imagem — Tarefa 8 (p. 211) |
+| [aula09-propriedade-das-transformacoes-lineares.md](notas/aula09-propriedade-das-transformacoes-lineares.md) | Propriedades das TLs — Tarefa 9 (p. 214) |
+| [aula10-autovalores-e-autovetores.md](notas/aula10-autovalores-e-autovetores.md) | Autovalores/autovetores (conceito) — Tarefa 10 (p. 276) |
+| [aula11-determinacao-de-autovalores-e-autovetores.md](notas/aula11-determinacao-de-autovalores-e-autovetores.md) | Equação característica, passo a passo — Tarefa 11 (p. 314) |
+| [aula12-propriedades-dos-autovalores.md](notas/aula12-propriedades-dos-autovalores.md) | Traço, determinante, propriedades — Tarefa 12 (p. 316) |
+| [ED1-aplicacoes-matrizes-e-sistemas-em-imagens.md](notas/ED1-aplicacoes-matrizes-e-sistemas-em-imagens.md) | **ED1:** proposta de apresentação usando matrizes em imagens digitais (material de PDICG) |
+
 ## Conteúdo programático
 
 ### 1º Bimestre
