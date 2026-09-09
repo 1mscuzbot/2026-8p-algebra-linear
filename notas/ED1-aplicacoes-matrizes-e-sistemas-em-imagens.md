@@ -1,83 +1,61 @@
-# ED1 — Aplicações de Matrizes e Sistemas de Equações na área do curso (Imagens Digitais)
+# ED1 — Matrizes e sistemas lineares em imagens digitais
 
-**Disciplina:** Álgebra Linear (Prof.ª Maria Eugênia de Carvalho e Silva)
-**Datas de apresentação:** 04/09 e 11/09/2026 (aulas 11–14 do plano)
-**Valor:** Estudo Dirigido vale 10,0 · Peso 3,0 (o ED é a média dos trabalhos apresentados)
-**Carga horária mínima do trabalho:** 16 h
+**Apresentação:** 11/09/2026 · **Duração alvo: 4–5 minutos**  
+**Tema:** Matrizes e sistemas na área do curso (imagens digitais / Ciência da Computação)
 
----
-
-## Sim, dá para usar o material de "geração de imagens"!
-
-A disciplina **Processamento Digital de Imagens e Computação Gráfica (PDICG)** do mesmo curso tem material diretamente reaproveitável: a **imagem digital é uma matriz** — e as operações de imagem são operações de matrizes. É um caso clássico de "aplicações na área do curso (Ciência da Computação)".
-
-**Fontes do repositório a citar:**
-- Notas de estudo de PDICG (já no repo `2026-8p-processamento-digital-de-imagens-e-computacao-grafica/notas/`):
-  - [Aula 02.1 — imagem como matriz de pixels e armazenamento](../../2026-8p-processamento-digital-de-imagens-e-computacao-grafica/notas/estudo-aula02-1-imagens-conceitos-e-representacao.md)
-  - [Aula 02.2 — operações de imagem por varredura (algoritmos)](../../2026-8p-processamento-digital-de-imagens-e-computacao-grafica/notas/estudo-aula02-2-amostragem-e-quantizacao-na-pratica.md)
-  - Aula 03 — conectividade (vizinhança usa índices da matriz) `…/estudo-aula03-vizinhanca-conectividade-e-rotulacao.md`
-- Slides: `2026-8p-processamento-digital-de-imagens-e-computacao-grafica/material/slides/PDI26-02-1-Imagens.pdf` e `PDI26-02-2-AmostragemQuantização.pdf`
-- Código: projeto OpenGL `2026-8p-processamento-digital-de-imagens-e-computacao-grafica/material/exercicios/PDI-Aula-02-proj/` (funções `ZoomOut`, `Thumbnail`, `ConvertToGrayScale`, `ConvertBlackAndWhite`)
-
-## Roteiro da apresentação (5–10 min)
-
-### 1. Introdução (30 s)
-Imagem digital m×n = **matriz m×n** em que cada elemento é um **pixel** com valor de intensidade `f(x,y)`. No RGB são 3 matrizes (R, G, B). → liga com a Aula 01 (matrizes, ordem, tipos).
-
-### 2. Operações com matrizes que viraram operações de imagem (2–3 min)
-| Álgebra Linear (aula) | Operação em imagens |
-|------------------------|----------------------|
-| **Transposta** `Aᵀ` (Aula 01) | girar/espelhar a imagem na diagonal — basta trocar linhas por colunas |
-| **Submatriz / limitação da ordem** | `ZoomOut`/`Thumbnail` (redimensionar): pegar 1 pixel a cada `fator` → a nova imagem é uma submatriz amostrada |
-| **Combinação linear** (Aula 06) | conversão para tons de cinza: `Y = 0,299R + 0,587G + 0,114B` — é uma combinação linear dos 3 canais → produto de **matriz 1×3 por vetor coluna** `[R G B]ᵀ` |
-| **Escalar × matriz** (Aula 01) | ajuste de brilho (somar constante) e contraste (multiplicar por escalar) |
-| **Matriz identidade** (Aula 01) | transformação "nula" (não altera a imagem) |
-
-### 3. Sistema de equações lineares em imagens (2 min)
-- Modelar sistemas com a forma `A·X = B` (Aula 04): o exemplo clássico é a **recuperação de cor**: se um sensor mede combinações lineares dos canais RGB, cada medição é uma equação e o sistema 3×3 resolve os R, G, B originais.
-- O enunciado do **ex. 4 da Tarefa 5** (caixas UEL, já resolvido na [Aula 05](aula05-problemas-com-sistemas-lineares.md)) é um modelo pronto de como apresentar a "montagem do sistema + matriz ampliada + escalonamento".
-
-### 4. Demonstração (2 min)
-- Usar as imagens `material/exercicios/Imagens/*.bmp` e mostrar a matriz de um pedaço da imagem (ex.: 8×8) impressa no terminal via `ImageClass` (projeto OpenGL de PDICG).
-- Se quiser, uma variação em Python (opcional) para gerar o mesmo efeito: `numpy` com `img[:, ::-1]` (espelho), `img.transpose()` (transposta), `img[::fator, ::fator]` (zoom out).
-
-### 5. Conclusão e bibliografia (30 s)
-- Concluir: "matrizes armazenam e transformam imagens; sistemas lineares resolvem dependências entre os canais de cor".
-- Bibliografia: STEINBRUCH & WINTERLE (Álgebra Linear), GONZALEZ & WOODS (Processamento de Imagens Digitais), slides das duas disciplinas.
-
-## Exemplo real 3×3 (pronto para o slide)
-
-Imagem: **`abbey.bmp`** (456×342, RGB 24-bit) do repo de PDICG. O recorte abaixo é da **janela** da foto (coordenadas x = 314..316, y = 300..302, origem no canto superior esquerdo; leitura direta dos bytes do BMP com script Python, valores reais).
-
-**1) A imagem é UMA matriz por canal (3 matrizes 456×342):**
-
-```
-R = |196 184 201|        G = |188 171 189|        B = |177 162 177|
-    |110  85  89|            | 85  56  58|            | 80  52  55|
-    | 38  33  29|            | 41  39  39|            | 32  29  28|
-```
-
-**2) Tons de cinza = combinação linear dos canais (Aula 06):** `Y = 0,299·R + 0,587·G + 0,114·B`
-
-Exemplo do primeiro pixel (x=314, y=300): `Y = 0,299·196 + 0,587·188 + 0,114·177 ≈ 58,6 + 110,4 + 20,2 ≈ 189`
-
-```
-Y = |189 174 191|
-    | 92  64  67|
-    | 39  36  35|
-```
-
-Compare com o original: o canto superior tem valores claros (janela/claro), o inferior escuros (sombra da parede) — a matriz **guarda a forma da imagem**.
-
-**Como reproduzir:** abrir `abbey.bmp` com a `ImageClass` do projeto de PDICG e imprimir o trecho no terminal (ou reexecutar o script de leitura de BMP usado aqui). 
-
-## Checklist de apresentação
-- [x] Definir tamanho da matriz + 1 exemplo pequeno com números reais (ex.: imagem 3×3 → matriz 3×3)
-- [ ] Mostrar 2–3 tabelas/figuras (matriz ↔ imagem)
-- [ ] Resolver UMA aplicação de sistema passo a passo (estilo Tarefa 5)
-- [ ] Rodar um programa OpenGL (ou Python) demonstrando transposta/espelho/zoom
-- [ ] Citar as fontes (STEINBRUCH; GONZALEZ & WOODS; slides)
+**Mensagem em uma frase:** a imagem digital é uma matriz; operações de matriz a transformam; um sistema linear recupera R, G, B.
 
 ---
 
-- Resumo das aulas → [aula01-matrizes](aula01-matrizes.md) · [aula04-sistemas](aula04-sistemas-de-equacoes-lineares.md) · [aula05-problemas](aula05-problemas-com-sistemas-lineares.md) · [aula06-combinacao-linear](aula06-espacos-vetoriais-e-combinacao-linear.md)
+## Os 3 arquivos para sexta
+
+| # | Arquivo | Para quê |
+|---|---------|----------|
+| 1 | [ED1-folha-sistema.md](ED1-folha-sistema.md) | Treinar o sistema no papel (~90 s) |
+| 2 | [ED1-slides-copiar-colar.md](ED1-slides-copiar-colar.md) | 5 slides prontos para colar no PowerPoint |
+| 3 | [demo-matrizes-imagens.py](../material/exercicios/demo-matrizes-imagens.py) | Demo de 20 s (transposta + contraste) |
+
+```bash
+cd 2026-8p-algebra-linear/material/exercicios
+python demo-matrizes-imagens.py
+```
+
+---
+
+## Timing (4–5 min)
+
+| Tempo | Slide | O que fazer |
+|------:|-------|-------------|
+| 0:00–0:15 | Capa | Título + “imagens = aplicação de AL em Computação” |
+| 0:15–1:00 | Imagem = matriz | Mostrar o 3×3; claro/escuro |
+| 1:00–2:00 | 2 operações | Só `Aᵀ` e `kA` (ou rodar o Python) |
+| 2:00–4:15 | Sistema | Montar `AX=B`, escalonar, chegar em 196, 188, 177 |
+| 4:15–4:45 | Fechamento | 3 bullets + Steinbruch |
+
+Se apertar: pule a demo ao vivo e deixe só os números do slide 3.
+
+---
+
+## Sistema (números oficiais)
+
+```
+R + G + B = 561
+2R + G    = 580
+R + 2B    = 550
+→ R=196, G=188, B=177
+```
+
+---
+
+## Evitar na fala
+
+- Aula de PDI (OpenGL, amostragem, Marr…)
+- “Identidade = nula”
+- Mais de 2 operações de matriz
+
+---
+
+## Bibliografia
+
+STEINBRUCH; WINTERLE. *Álgebra linear*. Pearson, 2014.  
+GONZALEZ; WOODS. *Processamento digital de imagens* (apoio).
