@@ -9,7 +9,7 @@ Cole cada bloco em um slide. Fonte grande, pouco texto. Fale o que está em *it�
 **Matrizes e sistemas lineares em imagens digitais**
 
 Álgebra Linear · Ciência da Computação  
-11/09/2026
+11/09/2026 → **18/09/2026**
 
 *“Boa tarde. Vou mostrar em 4 minutos como matrizes e sistemas lineares aparecem em imagens digitais.”*
 

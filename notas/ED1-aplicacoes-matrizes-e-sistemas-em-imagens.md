@@ -1,13 +1,15 @@
 # ED1 — Matrizes e sistemas lineares em imagens digitais
 
-**Apresentação:** 11/09/2026 · **Duração alvo: 4–5 minutos**  
+**Apresentação:** 18/09/2026 · **Duração alvo: 4–5 minutos**  
 **Tema:** Matrizes e sistemas na área do curso (imagens digitais / Ciência da Computação)
 
 **Mensagem em uma frase:** a imagem digital é uma matriz; operações de matriz a transformam; um sistema linear recupera R, G, B.
 
+**Roteiro de amanhã:** [ED1-checklist-apresentacao-18set.md](ED1-checklist-apresentacao-18set.md)
+
 ---
 
-## Os 3 arquivos para sexta
+## Os 3 arquivos da apresentação
 
 | # | Arquivo | Para quê |
 |---|---------|----------|

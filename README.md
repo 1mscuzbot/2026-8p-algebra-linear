@@ -28,6 +28,7 @@
 | [aula11-determinacao-de-autovalores-e-autovetores.md](notas/aula11-determinacao-de-autovalores-e-autovetores.md) | Equação característica, passo a passo — Tarefa 11 (p. 314) |
 | [aula12-propriedades-dos-autovalores.md](notas/aula12-propriedades-dos-autovalores.md) | Traço, determinante, propriedades — Tarefa 12 (p. 316) |
 | [ED1-aplicacoes-matrizes-e-sistemas-em-imagens.md](notas/ED1-aplicacoes-matrizes-e-sistemas-em-imagens.md) | **ED1:** apresentação ~4–5 min (matrizes + sistemas em imagens) |
+| [ED1-checklist-apresentacao-18set.md](notas/ED1-checklist-apresentacao-18set.md) | Checklist e timing da apresentação (18/09) |
 | [ED1-slides-copiar-colar.md](notas/ED1-slides-copiar-colar.md) | Texto dos 5 slides para colar no PowerPoint |
 | [ED1-folha-sistema.md](notas/ED1-folha-sistema.md) | Folha de treino do sistema 3×3 |
 | [demo-matrizes-imagens.py](material/exercicios/demo-matrizes-imagens.py) | Demo Python (transposta + contraste) |
