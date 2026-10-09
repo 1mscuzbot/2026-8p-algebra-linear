@@ -23,6 +23,7 @@
 | [aula06-espacos-vetoriais-e-combinacao-linear.md](notas/aula06-espacos-vetoriais-e-combinacao-linear.md) | Espaços vetoriais, combinação linear — Tarefa 6 (p. 15, 39) |
 | [aula07-dependencia-e-independencia-linear.md](notas/aula07-dependencia-e-independencia-linear.md) | LI/LD, base e dimensão — Tarefa 7 (p. 90, ex. 47–48 com respostas) |
 | [aula08-transformacoes-lineares.md](notas/aula08-transformacoes-lineares.md) | TL, núcleo e imagem — Tarefa 8 (p. 211) |
+| [revisao-provinha-09out-transformacoes-lineares.md](notas/revisao-provinha-09out-transformacoes-lineares.md) | Provinha 09/10: aula 08 dada em 02/10 (definição de TL) |
 | [aula09-propriedade-das-transformacoes-lineares.md](notas/aula09-propriedade-das-transformacoes-lineares.md) | Propriedades das TLs — Tarefa 9 (p. 214) |
 | [aula10-autovalores-e-autovetores.md](notas/aula10-autovalores-e-autovetores.md) | Autovalores/autovetores (conceito) — Tarefa 10 (p. 276) |
 | [aula11-determinacao-de-autovalores-e-autovetores.md](notas/aula11-determinacao-de-autovalores-e-autovetores.md) | Equação característica, passo a passo — Tarefa 11 (p. 314) |
@@ -79,8 +80,8 @@
 - Carga horária mínima do Estudo Dirigido: 8h
 
 ## Estudo Dirigido
-- **ED1:** Aplicações de matrizes e sistemas de equações na área do curso
-- **ED2:** Aplicações de autovalores e autovetores na área do curso
+- **ED1:** Aplicações de matrizes e sistemas de equações na área do curso — [notas](notas/ED1-aplicacoes-matrizes-e-sistemas-em-imagens.md)
+- **ED2:** Onde a computação usa autovalores (busca, imagens/dados, redes) — [notas](notas/ED2-aplicacoes-autovalores-pagerank.md) · [slides](notas/ED2-slides-copiar-colar.md) · [folha](notas/ED2-folha-calculo.md)
 - Referência: STEINBRUCH; WINTERLE. *Álgebra linear*. Pearson, 2014.
 
 ## Tarefas (12 ao total)
