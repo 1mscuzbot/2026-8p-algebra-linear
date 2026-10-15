@@ -1,6 +1,14 @@
-# Provinha 09/10 — Transformações lineares
+# [ARQUIVO ANTIGO] Revisao TL — datas corrigidas em 15/10
 
-**O que você faltou:** no plano, 02/10 era dependência linear (aula 07) e 09/10 era transformações lineares (aula 08). A aula 07 foi adiantada. No dia **02/10** a professora deu a **aula 08**. A provinha de **09/10** é sobre isso.
+> **Atualização:** a **Provinha 8** (conteúdo Aula 08 / Tarefa 8 — definição + T(0)) ficou para **16/10**, não 09/10.  
+> Material completo e resolvido → **[revisao-provinha-8-16out-transformacoes-lineares.md](revisao-provinha-8-16out-transformacoes-lineares.md)**  
+> No dia **09/10** rolou a **aula** (caderno T(0)); no **16/10** é a provinha desse conteúdo + começa a Aula 09 (Provinha 9 depois).
+
+---
+
+# Provinha 09/10 — Transformações lineares *(rascunho antigo)*
+
+**Contexto antigo (parcialmente ultrapassado):** no plano, 02/10 era dependência linear (aula 07) e 09/10 era transformações lineares (aula 08). A aula 07 foi adiantada; no **02/10** já veio conteúdo de TL. O caderno de **09/10** continua sendo a aula de referência do T(0).
 
 **Slide:** `material/slides/202485_17036_AL- Aulas.pdf`, páginas 32–36 (livro Steinbruch, p. 151).  
 O que está no slide: definição, a propriedade T(0) = 0, identidade, transformação nula, e “verificar quais são lineares”. Núcleo e imagem estão no nome do plano do dia, mas **não aparecem nessas páginas**. Estuda primeiro o que está no slide. O núcleo fica no final, como extra.

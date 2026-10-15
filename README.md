@@ -22,9 +22,10 @@
 | [aula05-problemas-com-sistemas-lineares.md](notas/aula05-problemas-com-sistemas-lineares.md) | Problemas aplicados (UEL, UEPG, ENEM, UNICAMP, UFPE) — Tarefa 5, com 1 exemplo resolvido |
 | [aula06-espacos-vetoriais-e-combinacao-linear.md](notas/aula06-espacos-vetoriais-e-combinacao-linear.md) | Espaços vetoriais, combinação linear — Tarefa 6 (p. 15, 39) |
 | [aula07-dependencia-e-independencia-linear.md](notas/aula07-dependencia-e-independencia-linear.md) | LI/LD, base e dimensão — Tarefa 7 (p. 90, ex. 47–48 com respostas) |
-| [aula08-transformacoes-lineares.md](notas/aula08-transformacoes-lineares.md) | TL, núcleo e imagem — Tarefa 8 (p. 211) |
-| [revisao-provinha-09out-transformacoes-lineares.md](notas/revisao-provinha-09out-transformacoes-lineares.md) | Provinha 09/10: aula 08 dada em 02/10 (definição de TL) |
-| [aula09-propriedade-das-transformacoes-lineares.md](notas/aula09-propriedade-das-transformacoes-lineares.md) | Propriedades das TLs — Tarefa 9 (p. 214) |
+| [aula08-transformacoes-lineares.md](notas/aula08-transformacoes-lineares.md) | TL, definição + T(0) — Tarefa 8 (p. 211) |
+| [revisao-provinha-8-16out-transformacoes-lineares.md](notas/revisao-provinha-8-16out-transformacoes-lineares.md) | **Provinha 8 (16/10):** verificar linearidade + 4.8 do Steinbruch |
+| [revisao-provinha-09out-transformacoes-lineares.md](notas/revisao-provinha-09out-transformacoes-lineares.md) | *(antigo)* rascunho TL — redireciona para a Provinha 8 |
+| [aula09-propriedade-das-transformacoes-lineares.md](notas/aula09-propriedade-das-transformacoes-lineares.md) | Propriedades das TLs — Tarefa 9 (p. 214) · base da Provinha 9 |
 | [aula10-autovalores-e-autovetores.md](notas/aula10-autovalores-e-autovetores.md) | Autovalores/autovetores (conceito) — Tarefa 10 (p. 276) |
 | [aula11-determinacao-de-autovalores-e-autovetores.md](notas/aula11-determinacao-de-autovalores-e-autovetores.md) | Equação característica, passo a passo — Tarefa 11 (p. 314) |
 | [aula12-propriedades-dos-autovalores.md](notas/aula12-propriedades-dos-autovalores.md) | Traço, determinante, propriedades — Tarefa 12 (p. 316) |
@@ -49,7 +50,7 @@
 | 15 | 18/09 | Estudo Dirigido 1 + **Avaliação 1º Bimestre** |
 
 ### 2º Bimestre
-| Aulas | Data | Tema |
+| Aulas | Data | Tema (plano) |
 |-------|------|------|
 | 17-18 | 25/09 | Espaços vetoriais: definição, propriedades e combinação linear |
 | 19-20 | 02/10 | Dependência e independência linear; base e dimensão |
@@ -63,6 +64,21 @@
 | 35-36 | 27/11 | **Avaliação 2º Bimestre** |
 | 37-38 | 03/12 | Revisão de conteúdo |
 | 39-40 | 04/12 | **Exame Final** (11/12 — segunda chamada) |
+
+### Próximas (2º bim) — plano vs real
+
+Padrão observado: **aula do conteúdo N numa sexta → provinha N na sexta seguinte**, enquanto ela já ensina o conteúdo N+1.
+
+| Data | Plano (oficial) | O que está rolando (real) | Provinha |
+|------|-----------------|---------------------------|----------|
+| 02/10 | Aula 07 (LI/LD) | Conteúdo de TL adiantado (parte) | — |
+| 09/10 | Aula 08 (TL) | **Aula** de definição + T(0) (caderno) | — |
+| **16/10** | Aula 09 (propriedades) | **Provinha 8** (Aula 08 / Tarefa 8) **+** começa Aula 09 | **Provinha 8** ← amanhã |
+| **23/10** | Aula 10 (autovalores) | Aula 10 + **Provinha 9** *(estimada: Aula 09 / Tarefa 9)* | Provinha 9 *(estimada)* |
+| 30/10 | Aula 11 + ED | Continua autovalores / estudo dirigido | — |
+
+- **Provinha 8 (16/10):** [revisao-provinha-8-16out-transformacoes-lineares.md](notas/revisao-provinha-8-16out-transformacoes-lineares.md)
+- **Provinha 9:** estudar Aula 09 depois da aula de 16/10 (slide pág. 37–39 · livro p. 160 · Tarefa 9 p. 214) — “TL definida pela imagem da base” / combinações lineares.
 
 ## Datas de prova
 - **Trab. Nivelamento-1:** 31/Agosto

@@ -2,6 +2,8 @@
 
 **Disciplina:** Álgebra Linear (Prof.ª Maria Eugênia de Carvalho e Silva)
 **Data (plano):** Aulas 21–22 · 09/10 · 2º Bimestre
+**Data (real):** aula vista em **09/10** (caderno T(0)/definição); conteúdo também adiantado em 02/10
+**Provinha 8:** **16/10** — revisão → [revisao-provinha-8-16out-transformacoes-lineares.md](revisao-provinha-8-16out-transformacoes-lineares.md)
 **Slide:** `material/slides/202485_17036_AL- Aulas.pdf` (páginas 32–36)
 **Livro texto:** STEINBRUCH; WINTERLE (slides: p. 151; tarefa: p. 211)
 

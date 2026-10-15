@@ -2,6 +2,8 @@
 
 **Disciplina:** Álgebra Linear (Prof.ª Maria Eugênia de Carvalho e Silva)
 **Data (plano):** Aulas 23–24 · 16/10 · 2º Bimestre
+**Data (real):** **16/10** — neste dia também rola a **Provinha 8** (Aula 08); a aula do dia ensina **Aula 09** (baseia a Provinha 9)
+**Provinha 9 (estimada):** **23/10** — conteúdo: propriedade da TL (combinação linear / definida pela base; Tarefa 9, livro p. 214 / slide p. 160)
 **Slide:** `material/slides/202485_17036_AL- Aulas.pdf` (páginas 37–39)
 **Livro texto:** STEINBRUCH; WINTERLE (slides: p. 160; tarefa: p. 214)
 
