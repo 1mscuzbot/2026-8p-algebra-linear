@@ -6,17 +6,17 @@
 **Livro texto:** STEINBRUCH, Alfredo; WINTERLE, Paulo. *Álgebra linear*. Pearson, 2014.
 
 > **Branch principal:** `master` (equivalente ao *main* no GitHub).  
-> **Atualizado:** 15/10/2026 — panorama abaixo alinha **plano oficial**, **notas no repo** (Aulas 01–12) e **provinhas** (padrão real observado).
+> **Atualizado:** 22/10/2026 — panorama abaixo alinha **plano oficial**, **notas no repo** (Aulas 01–12) e **provinhas** (padrão real observado).
 
 ## Panorama geral
 
-### Onde estamos (15/10/2026)
+### Onde estamos (22/10/2026)
 
 | | |
 |---|---|
-| **Amanhã 16/10** | **Provinha 8** — transformações lineares (definição, T(0), verificar linearidade) → [revisão](notas/revisao-provinha-8-16out-transformacoes-lineares.md) |
-| **Mesmo dia 16/10** | Aula **09** — propriedade da transformação linear (início do conteúdo da Provinha 9) |
-| **Estimado 23/10** | **Provinha 9** — propriedades das TLs (Tarefa 9) |
+| **Hoje 22/10 → amanhã 23/10** | **Provinha 9** — propriedades das TLs (combinação linear / T definida pela base; Tarefa 9) → [revisão](notas/revisao-provinha-9-23out-propriedades-tl.md) |
+| **Mesmo dia 23/10 (plano)** | Aula **10** — operadores / autovalores (intro) — [Aula 10](notas/aula10-autovalores-e-autovetores.md) |
+| **Já feita 16/10** | **Provinha 8** — verificar linearidade + T(0) → [revisão](notas/revisao-provinha-8-16out-transformacoes-lineares.md) |
 | **Prova bimestral** | 27/11 (2º bimestre) |
 
 **Padrão das provinhas:** aula do conteúdo numa sexta → **provinha** desse conteúdo na **sexta seguinte**, enquanto a professora já avança o próximo tópico.
@@ -93,6 +93,7 @@ Cada linha é o **título do plano** (`material/2026727_133027_Algebra Linear-Pl
 | [revisao-provinha-8-16out-transformacoes-lineares.md](notas/revisao-provinha-8-16out-transformacoes-lineares.md) | **Provinha 8 (16/10):** verificar linearidade + 4.8 do Steinbruch |
 | [revisao-provinha-09out-transformacoes-lineares.md](notas/revisao-provinha-09out-transformacoes-lineares.md) | *(antigo)* rascunho TL — redireciona para a Provinha 8 |
 | [aula09-propriedade-das-transformacoes-lineares.md](notas/aula09-propriedade-das-transformacoes-lineares.md) | Propriedades das TLs — Tarefa 9 (p. 214) · base da Provinha 9 |
+| [revisao-provinha-9-23out-propriedades-tl.md](notas/revisao-provinha-9-23out-propriedades-tl.md) | **Provinha 9 (23/10):** propriedades + T pela base (Steinbruch ~p. 214) |
 | [aula10-autovalores-e-autovetores.md](notas/aula10-autovalores-e-autovetores.md) | Autovalores/autovetores (conceito) — Tarefa 10 (p. 276) |
 | [aula11-determinacao-de-autovalores-e-autovetores.md](notas/aula11-determinacao-de-autovalores-e-autovetores.md) | Equação característica, passo a passo — Tarefa 11 (p. 314) |
 | [aula12-propriedades-dos-autovalores.md](notas/aula12-propriedades-dos-autovalores.md) | Traço, determinante, propriedades — Tarefa 12 (p. 316) |
