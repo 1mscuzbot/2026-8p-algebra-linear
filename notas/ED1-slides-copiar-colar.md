@@ -9,52 +9,63 @@ Cole cada bloco em um slide. Fonte grande, pouco texto. Fale o que está em *it�
 **Matrizes e sistemas lineares em imagens digitais**
 
 Álgebra Linear · Ciência da Computação  
-11/09/2026 → **18/09/2026**
+**18/09/2026**
 
-*“Boa tarde. Vou mostrar em 4 minutos como matrizes e sistemas lineares aparecem em imagens digitais.”*
-
----
-
-## Slide 2 — Imagem = matriz (~45 s)
-
-**Imagem digital = matriz**
-
-- Tons de cinza → 1 matriz `m×n`
-- RGB → 3 matrizes (R, G, B)
-- Cada número = 1 pixel (0–255)
-
-```
-R = |196 184 201|     G = |188 171 189|     B = |177 162 177|
-    |110  85  89|         | 85  56  58|         | 80  52  55|
-    | 38  33  29|         | 41  39  39|         | 32  29  28|
-```
-
-*“Recorte real 3×3: claro em cima, escuro embaixo — a matriz guarda a imagem.”*
+*“Boa tarde. Vou mostrar como a imagem digital é tratada com matrizes — no dia a dia do programador.”*
 
 ---
 
-## Slide 3 — Duas operações (~1 min)
+## Slide 2 — Como a imagem se organiza (~1 min) ← abrir com isto
 
-**Operações de matriz → efeito visual**
+**Imagem m×n = 3 matrizes do mesmo tamanho**
 
-| Álgebra Linear | Imagem |
-|----------------|--------|
-| Transposta `Aᵀ` | Espelha pela diagonal (linhas ↔ colunas) |
-| Escalar `kA` | Contraste (`k=0,5` ou `k=1,5`) |
+Exemplo: foto **20×20** colorida
+
+- matriz **R** 20×20 (vermelho)  
+- matriz **G** 20×20 (verde)  
+- matriz **B** 20×20 (azul)  
+
+**Mesma posição `(linha, coluna)` nas três = o mesmo pixel.**  
+Na tela: R, G e B daquela casa acendem juntos → **1 cor**.
+
+```text
+  R 20×20     G 20×20     B 20×20
+  [ ... ]  +  [ ... ]  +  [ ... ]  →  imagem na tela
+                 ↓
+        pixel (i,j) = luz (Rij, Gij, Bij)
+```
+
+Recorte real 3×3 (mesmo esquema, só menor):
 
 ```
-Rᵀ = |196 110  38|      0,5·R ≈ |98 92 100|
-     |184  85  33|               |55 42  44|
-     |201  89  29|               |19 16  14|
+R = |196 184 201|   G = |188 171 189|   B = |177 162 177|
+    |110  85  89|       | 85  56  58|       | 80  52  55|
+    | 38  33  29|       | 41  39  39|       | 32  29  28|
 ```
+
+*“Não é uma mistura bagunçada: são 3 tabelas alinhadas. No ponto (1,1), R G e B daquele ponto viram a cor final.”*
+
+---
+
+## Slide 3 — Operações no dia a dia (~1 min)
+
+**O programador percorre a matriz (`img[y][x]`) e aplica operações**
+
+| Álgebra Linear | Na imagem |
+|----------------|-----------|
+| Transposta `Aᵀ` | Espelha pela diagonal |
+| Escalar `kA` | Contraste |
 
 *“Transposta troca linha/coluna. Multiplicar por escalar muda o contraste.”*
 
 ---
 
-## Slide 4 — Sistema linear (~2 min) ← foco
+## Slide 4 — Sistema linear (~1,5–2 min) · exemplo didático
 
-**Recuperar R, G, B a partir de medições misturadas**
+**Ferramenta da disciplina:** várias incógnitas + várias condições.  
+*(Imagem pronta para colar: `_ed1_assets/slide04_sistema_gauss_detalhado_wide.png`)*
+
+### Sistema
 
 ```
 R + G + B = 561
@@ -62,32 +73,36 @@ R + G + B = 561
 R + 2B    = 550
 ```
 
+Ampliada `[A|B]`:
+
 ```
-| 1  1  1 | |R|   |561|
-| 2  1  0 | |G| = |580|
-| 1  0  2 | |B|   |550|
+[ 1  1  1 | 561 ]
+[ 2  1  0 | 580 ]
+[ 1  0  2 | 550 ]
 ```
 
-**Resolução (resumo no slide; detalhe na folha):**
+### Gauss (detalhe)
 
-1. `L₂ ← L₂ − 2L₁` · `L₃ ← L₃ − L₁`
-2. `L₃ ← L₃ − L₂` → **B = 177**
-3. Volta: **G = 188**, **R = 196**
+1. `L₂ ← L₂ − 2L₁` → `[0  −1  −2 | −542]`  
+2. `L₃ ← L₃ − L₁`  → `[0  −1   1 |  −11]`  
+3. `L₃ ← L₃ − L₂`  → `[0   0   3 |  531]` → **B = 531/3 = 177**  
+4. Em `L₂`: `−G − 2·177 = −542` → `−G = −188` → **G = 188**  
+5. Em `L₁`: `R + 188 + 177 = 561` → **R = 196**
 
-*“É o mesmo método da Tarefa 5: montar `A X = B` e escalonar. Conferência: 2·196+188=580 ✓”*
+### Conferência
+
+`196+188+177=561` · `2·196+188=580` · `196+2·177=550`
+
+*“Exemplo didático com o método da aula. No dia a dia o arquivo já traz R, G e B separados.”*
 
 ---
 
-## Slide 5 — Fechamento (~30 s)
+## Slide 5 — Fechamento (~20 s)
 
-**Conclusão**
+1. Imagem colorida = **3 matrizes alinhadas** (R, G, B)  
+2. Operações de matriz = efeitos na imagem  
+3. Sistema linear = ferramenta para descobrir valores (exemplo)  
 
-1. Imagem = matriz  
-2. Operações de matriz transformam a imagem  
-3. Sistemas lineares recuperam os canais de cor  
-
-**Bibliografia**  
-STEINBRUCH; WINTERLE. *Álgebra linear*. Pearson, 2014.  
-GONZALEZ; WOODS. *Processamento digital de imagens*.
+STEINBRUCH; WINTERLE · GONZALEZ; WOODS  
 
 *“Obrigado.”*
