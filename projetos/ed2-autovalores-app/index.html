@@ -111,6 +111,24 @@
     }
     .steps button:hover { border-color: var(--muted); }
 
+    .fs-btn {
+      border: 2px solid var(--accent);
+      background: var(--accent);
+      color: #ffffff;
+      padding: 0.75rem 1.15rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font: inherit;
+      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .fs-btn:hover { filter: brightness(1.05); }
+    .fs-btn.is-fs {
+      background: var(--panel);
+      color: var(--accent);
+    }
+
     main {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
@@ -334,12 +352,15 @@
       <h1>PageRank: o ranking é um autovetor</h1>
       <p>3 páginas · matriz de links G · Gv = λv com λ = 1</p>
     </div>
-    <nav class="steps" aria-label="Etapas da apresentação">
-      <button type="button" data-step="0" class="active">1. Ideia</button>
-      <button type="button" data-step="1">2. Grafo</button>
-      <button type="button" data-step="2">3. Iterar</button>
-      <button type="button" data-step="3">4. Conferir</button>
-    </nav>
+    <div style="display:flex; flex-wrap:wrap; gap:0.55rem; align-items:center;">
+      <nav class="steps" aria-label="Etapas da apresentação">
+        <button type="button" data-step="0" class="active">1. Ideia</button>
+        <button type="button" data-step="1">2. Grafo</button>
+        <button type="button" data-step="2">3. Iterar</button>
+        <button type="button" data-step="3">4. Conferir</button>
+      </nav>
+      <button type="button" class="fs-btn" id="btn-fs" title="Tela cheia (ou F11)">Tela cheia</button>
+    </div>
   </header>
 
   <main>
@@ -352,8 +373,8 @@
   </main>
 
   <footer>
-    Exemplo das notas ED2 (A → B,C · B → A,C · C → A). Atalhos: <kbd>1</kbd>–<kbd>4</kbd> etapas ·
-    <kbd>Espaço</kbd> / <kbd>→</kbd> avançar · <kbd>←</kbd> voltar.
+    Exemplo das notas ED2 (A → B,C · B → A,C · C → A). Atalhos: <kbd>1</kbd>–<kbd>4</kbd> ·
+    <kbd>Espaço</kbd> / <kbd>→</kbd> · <kbd>←</kbd> · <kbd>F11</kbd> / botão Tela cheia.
     Steinbruch Cap. 6 · Brin &amp; Page, 1998. · Tema claro · palco 4:3.
   </footer>
   </div>
@@ -620,6 +641,36 @@
 
     stepBtns.forEach((b) => b.addEventListener("click", () => setStep(+b.dataset.step)));
 
+    const fsBtn = document.getElementById("btn-fs");
+    function isFullscreen() {
+      return !!(document.fullscreenElement || document.webkitFullscreenElement);
+    }
+    function syncFsBtn() {
+      const on = isFullscreen();
+      fsBtn.textContent = on ? "Sair da tela cheia" : "Tela cheia";
+      fsBtn.classList.toggle("is-fs", on);
+      fsBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    }
+    async function toggleFullscreen() {
+      try {
+        if (isFullscreen()) {
+          const exit = document.exitFullscreen || document.webkitExitFullscreen;
+          if (exit) await exit.call(document);
+        } else {
+          const el = document.documentElement;
+          const req = el.requestFullscreen || el.webkitRequestFullscreen;
+          if (req) await req.call(el);
+          else alert("Fullscreen API indisponível — use F11.");
+        }
+      } catch (err) {
+        alert("Não deu para alternar tela cheia. Use F11.");
+      }
+      syncFsBtn();
+    }
+    fsBtn.addEventListener("click", toggleFullscreen);
+    document.addEventListener("fullscreenchange", syncFsBtn);
+    document.addEventListener("webkitfullscreenchange", syncFsBtn);
+
     document.addEventListener("keydown", (e) => {
       if (e.target.matches("input, textarea")) return;
       if (e.key >= "1" && e.key <= "4") setStep(+e.key - 1);
@@ -635,6 +686,7 @@
     window.powerStep = powerStep;
     window.jumpExact = jumpExact;
 
+    syncFsBtn();
     setStep(0);
   </script>
 </body>
