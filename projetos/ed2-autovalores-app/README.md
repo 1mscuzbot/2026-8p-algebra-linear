@@ -22,7 +22,9 @@ python3 -m http.server 8765
 # abra http://127.0.0.1:8765/
 ```
 
-Atalhos na tela: `1`–`4` etapas · `→` / `Espaço` avança · `←` volta.
+Atalhos: `1`–`4` · `→` / `Espaço` · `←`.
+
+**Projetor:** tema claro, tipografia/botões grandes, palco **4:3** centralizado (não widescreen). Preferir tela cheia (`F11`).
 
 ## Roteiro oral (~4–5 min)
 

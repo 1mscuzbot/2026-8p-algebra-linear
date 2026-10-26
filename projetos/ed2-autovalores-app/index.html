@@ -6,175 +6,221 @@
   <title>ED2 — PageRank = Autovetor</title>
   <style>
     :root {
-      --bg: #0f1a24;
-      --panel: #172636;
-      --ink: #e8eef4;
-      --muted: #9bb0c3;
-      --accent: #3db8a0;
-      --accent-dim: #2a7f6e;
-      --a: #4ea1ff;
-      --b: #f0a34a;
-      --c: #e06b8a;
-      --line: #2c4258;
-      --ok: #7ddea0;
+      --bg: #e8eef2;
+      --stage: #f7f9fb;
+      --panel: #ffffff;
+      --ink: #15202b;
+      --muted: #4a5d70;
+      --accent: #0d7a68;
+      --accent-soft: #d6efe9;
+      --a: #1a6fd4;
+      --b: #c7770a;
+      --c: #c44066;
+      --line: #c5d0db;
+      --ok: #1a7a45;
       --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
       --mono: "Cascadia Code", "Fira Code", Consolas, monospace;
     }
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; }
+    html, body { margin: 0; height: 100%; }
     body {
       font-family: var(--font);
       color: var(--ink);
-      background:
-        radial-gradient(ellipse 90% 60% at 10% -10%, #1c3a4f 0%, transparent 55%),
-        radial-gradient(ellipse 70% 50% at 100% 0%, #16352e 0%, transparent 45%),
-        var(--bg);
+      background: var(--bg);
       line-height: 1.35;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5vh 2vw;
+    }
+
+    /* Palco ~4:3 centralizado (bordas laterais no widescreen do projetor) */
+    .stage {
+      width: min(96vw, calc(96vh * 4 / 3), 980px);
+      max-height: 96vh;
+      aspect-ratio: 4 / 3;
+      background: var(--stage);
+      border: 2px solid var(--line);
+      border-radius: 16px;
+      box-shadow: 0 8px 28px rgba(21, 32, 43, 0.12);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    @media (max-aspect-ratio: 4/3) {
+      .stage {
+        width: min(96vw, 980px);
+        aspect-ratio: auto;
+        height: auto;
+        max-height: none;
+      }
     }
 
     header {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.75rem 1.5rem;
+      gap: 0.7rem 1rem;
       align-items: flex-end;
       justify-content: space-between;
-      padding: 1.1rem 1.5rem 0.8rem;
-      border-bottom: 1px solid var(--line);
+      padding: 1rem 1.25rem 0.85rem;
+      border-bottom: 2px solid var(--line);
+      background: var(--panel);
+      flex-shrink: 0;
     }
     header h1 {
       margin: 0;
-      font-size: clamp(1.15rem, 2.4vw, 1.55rem);
-      font-weight: 700;
-      letter-spacing: 0.01em;
+      font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+      font-weight: 800;
+      letter-spacing: -0.01em;
     }
     header p {
-      margin: 0.2rem 0 0;
+      margin: 0.25rem 0 0;
       color: var(--muted);
-      font-size: 0.92rem;
+      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+      font-weight: 500;
     }
     .brand {
-      font-size: 0.78rem;
+      font-size: clamp(0.8rem, 1.3vw, 0.95rem);
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .steps {
       display: flex;
-      gap: 0.4rem;
+      gap: 0.45rem;
       flex-wrap: wrap;
     }
     .steps button {
-      border: 1px solid var(--line);
+      border: 2px solid var(--line);
       background: var(--panel);
       color: var(--ink);
-      padding: 0.45rem 0.75rem;
-      border-radius: 8px;
+      padding: 0.65rem 0.95rem;
+      border-radius: 10px;
       cursor: pointer;
       font: inherit;
-      font-size: 0.85rem;
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      font-weight: 700;
     }
     .steps button.active {
       border-color: var(--accent);
-      background: #1d3f3a;
+      background: var(--accent-soft);
       color: var(--accent);
-      font-weight: 600;
     }
     .steps button:hover { border-color: var(--muted); }
 
     main {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 1rem;
-      padding: 1rem 1.5rem 1.5rem;
-      max-width: 1180px;
-      margin: 0 auto;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 0.85rem;
+      padding: 0.85rem 1.15rem 0.75rem;
+      flex: 1;
+      min-height: 0;
+      overflow: auto;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 720px) {
       main { grid-template-columns: 1fr; }
     }
 
     .card {
-      background: color-mix(in srgb, var(--panel) 92%, black);
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 1rem 1.1rem 1.15rem;
+      background: var(--panel);
+      border: 2px solid var(--line);
+      border-radius: 12px;
+      padding: 0.95rem 1.05rem 1.05rem;
       min-height: 0;
+      overflow: auto;
     }
     .card h2 {
-      margin: 0 0 0.55rem;
-      font-size: 1.05rem;
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+      font-weight: 800;
     }
     .hint {
       color: var(--muted);
-      font-size: 0.88rem;
-      margin: 0 0 0.9rem;
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      margin: 0 0 0.75rem;
+      font-weight: 500;
     }
 
     .formula {
       font-family: var(--mono);
-      font-size: clamp(1.2rem, 3vw, 1.7rem);
+      font-size: clamp(1.55rem, 3.2vw, 2.15rem);
+      font-weight: 700;
       text-align: center;
-      padding: 0.9rem;
-      border-radius: 10px;
-      background: #12202c;
-      border: 1px dashed var(--accent-dim);
-      margin: 0.6rem 0 1rem;
+      padding: 1rem;
+      border-radius: 12px;
+      background: var(--accent-soft);
+      border: 2px dashed var(--accent);
+      margin: 0.55rem 0 0.9rem;
+      color: var(--ink);
     }
     .formula .lambda { color: var(--accent); }
-    .bullets { margin: 0; padding-left: 1.1rem; }
-    .bullets li { margin: 0.35rem 0; }
+    .bullets {
+      margin: 0;
+      padding-left: 1.25rem;
+      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+    }
+    .bullets li { margin: 0.45rem 0; }
 
     .viz {
       position: relative;
       width: 100%;
-      aspect-ratio: 1.15 / 1;
-      max-height: 420px;
-      background: #101c28;
+      aspect-ratio: 1 / 1;
+      max-height: min(38vh, 340px);
+      margin: 0 auto;
+      background: #eef3f7;
       border-radius: 12px;
-      border: 1px solid var(--line);
+      border: 2px solid var(--line);
       overflow: hidden;
     }
     svg { width: 100%; height: 100%; display: block; }
     .node circle {
       stroke-width: 3;
-      transition: r 0.35s ease, filter 0.35s ease;
+      transition: r 0.35s ease;
     }
     .node text {
       font-family: var(--font);
-      font-weight: 700;
-      fill: #0b1218;
-      font-size: 18px;
+      font-weight: 800;
+      fill: #ffffff;
+      font-size: 22px;
       text-anchor: middle;
       dominant-baseline: central;
       pointer-events: none;
     }
     .edge {
       fill: none;
-      stroke: #6b849c;
-      stroke-width: 2.2;
+      stroke: #5a6f82;
+      stroke-width: 2.8;
       marker-end: url(#arrow);
-      opacity: 0.85;
+      opacity: 0.9;
     }
-    .edge.pulse { stroke: var(--accent); opacity: 1; }
     .rank-label {
       font-family: var(--mono);
-      font-size: 12px;
+      font-size: 15px;
+      font-weight: 700;
       fill: var(--ink);
       text-anchor: middle;
     }
 
-    .bars { display: grid; gap: 0.55rem; margin-top: 0.7rem; }
-    .bar-row { display: grid; grid-template-columns: 28px 1fr 64px; gap: 0.55rem; align-items: center; }
-    .bar-row .name { font-weight: 700; }
+    .bars { display: grid; gap: 0.65rem; margin-top: 0.55rem; }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 36px 1fr 78px;
+      gap: 0.55rem;
+      align-items: center;
+    }
+    .bar-row .name {
+      font-weight: 800;
+      font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+    }
     .track {
-      height: 22px;
-      background: #0d1822;
-      border-radius: 999px;
+      height: 32px;
+      background: #e4ebf1;
+      border-radius: 8px;
       overflow: hidden;
-      border: 1px solid var(--line);
+      border: 2px solid var(--line);
     }
     .fill {
       height: 100%;
@@ -182,57 +228,66 @@
       border-radius: inherit;
       transition: width 0.45s ease;
     }
-    .fill.A { background: linear-gradient(90deg, #2b6fb8, var(--a)); }
-    .fill.B { background: linear-gradient(90deg, #b06b1a, var(--b)); }
-    .fill.C { background: linear-gradient(90deg, #a13d58, var(--c)); }
-    .pct { font-family: var(--mono); font-size: 0.85rem; text-align: right; }
+    .fill.A { background: var(--a); }
+    .fill.B { background: var(--b); }
+    .fill.C { background: var(--c); }
+    .pct {
+      font-family: var(--mono);
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      font-weight: 700;
+      text-align: right;
+    }
 
     .matrix-wrap {
       overflow-x: auto;
       font-family: var(--mono);
-      font-size: 0.92rem;
+      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
     }
     table.mat {
       border-collapse: collapse;
       margin: 0.3rem auto;
     }
     table.mat th, table.mat td {
-      border: 1px solid var(--line);
-      padding: 0.4rem 0.65rem;
+      border: 2px solid var(--line);
+      padding: 0.55rem 0.8rem;
       text-align: center;
-      min-width: 3.2rem;
+      min-width: 3.6rem;
+      font-weight: 700;
     }
-    table.mat th { color: var(--muted); font-weight: 600; background: #12202c; }
-    table.mat td.hl { background: #1c3a4f; color: var(--accent); }
+    table.mat th {
+      color: var(--muted);
+      background: #eef3f7;
+    }
 
     .controls {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin: 0.85rem 0 0.4rem;
+      gap: 0.55rem;
+      margin: 0.85rem 0 0.35rem;
     }
     .controls button, .ghost {
-      border: 1px solid var(--accent-dim);
+      border: 2px solid var(--accent);
       background: var(--accent);
-      color: #062018;
+      color: #ffffff;
       font: inherit;
-      font-weight: 700;
-      padding: 0.55rem 0.9rem;
-      border-radius: 9px;
+      font-weight: 800;
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      padding: 0.7rem 1.05rem;
+      border-radius: 10px;
       cursor: pointer;
     }
     .controls button.secondary, .ghost {
-      background: transparent;
+      background: var(--panel);
       color: var(--ink);
       border-color: var(--line);
-      font-weight: 600;
     }
     .controls button:disabled { opacity: 0.45; cursor: default; }
 
     .status {
-      min-height: 1.4rem;
+      min-height: 1.5rem;
       font-family: var(--mono);
-      font-size: 0.86rem;
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      font-weight: 700;
       color: var(--muted);
       margin-top: 0.35rem;
     }
@@ -240,34 +295,39 @@
 
     .check {
       display: grid;
-      gap: 0.35rem;
+      gap: 0.4rem;
       font-family: var(--mono);
-      font-size: 0.9rem;
-      background: #12202c;
+      font-size: clamp(1rem, 1.6vw, 1.15rem);
+      font-weight: 700;
+      background: #eef3f7;
       border-radius: 10px;
-      padding: 0.75rem 0.85rem;
-      border: 1px solid var(--line);
-      margin-top: 0.7rem;
+      padding: 0.85rem 0.95rem;
+      border: 2px solid var(--line);
+      margin-top: 0.65rem;
     }
 
     footer {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 0 1.5rem 1.4rem;
+      padding: 0.55rem 1.25rem 0.75rem;
       color: var(--muted);
-      font-size: 0.82rem;
+      font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+      font-weight: 500;
+      border-top: 2px solid var(--line);
+      background: var(--panel);
+      flex-shrink: 0;
     }
     kbd {
       font-family: var(--mono);
-      font-size: 0.78em;
+      font-size: 0.9em;
       border: 1px solid var(--line);
       border-radius: 4px;
       padding: 0.05rem 0.35rem;
-      background: #12202c;
+      background: #eef3f7;
+      color: var(--ink);
     }
   </style>
 </head>
 <body>
+  <div class="stage">
   <header>
     <div>
       <div class="brand">Álgebra Linear · ED2</div>
@@ -294,8 +354,9 @@
   <footer>
     Exemplo das notas ED2 (A → B,C · B → A,C · C → A). Atalhos: <kbd>1</kbd>–<kbd>4</kbd> etapas ·
     <kbd>Espaço</kbd> / <kbd>→</kbd> avançar · <kbd>←</kbd> voltar.
-    Steinbruch Cap. 6 · Brin &amp; Page, 1998.
+    Steinbruch Cap. 6 · Brin &amp; Page, 1998. · Tema claro · palco 4:3.
   </footer>
+  </div>
 
   <script>
     // Matriz Google do exemplo (colunas somam 1). Ordem A, B, C.
@@ -306,7 +367,7 @@
     ];
     const EXACT = [4 / 9, 2 / 9, 1 / 3];
     const NAMES = ["A", "B", "C"];
-    const COLORS = { A: "#4ea1ff", B: "#f0a34a", C: "#e06b8a" };
+    const COLORS = { A: "#1a6fd4", B: "#c7770a", C: "#c44066" };
 
     let step = 0;
     let v = [1 / 3, 1 / 3, 1 / 3];
@@ -364,12 +425,12 @@
 
     function graphSVG(vec) {
       const pos = {
-        A: [120, 70],
-        B: [280, 70],
-        C: [200, 210],
+        A: [110, 95],
+        B: [290, 95],
+        C: [200, 275],
       };
-      const rBase = 28;
-      const rs = vec.map((w) => rBase + 42 * w);
+      const rBase = 34;
+      const rs = vec.map((w) => rBase + 48 * w);
 
       // curved edges with mid control points
       const edges = [
@@ -392,11 +453,11 @@
 
       return `
         <div class="viz" aria-label="Grafo de três páginas">
-          <svg viewBox="0 0 400 290" role="img">
+          <svg viewBox="0 0 400 400" role="img">
             <defs>
               <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
-                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-                <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b849c" />
+                markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#5a6f82" />
               </marker>
             </defs>
             ${edges.map(([f, t]) =>
@@ -407,9 +468,9 @@
               const r = rs[i];
               return `
                 <g class="node">
-                  <circle cx="${x}" cy="${y}" r="${r}" fill="${COLORS[name]}" stroke="#0b1218" />
+                  <circle cx="${x}" cy="${y}" r="${r}" fill="${COLORS[name]}" stroke="#15202b" />
                   <text x="${x}" y="${y}">${name}</text>
-                  <text class="rank-label" x="${x}" y="${y + r + 16}">${pct(vec[i])}</text>
+                  <text class="rank-label" x="${x}" y="${y + r + 20}">${pct(vec[i])}</text>
                 </g>`;
             }).join("")}
           </svg>
