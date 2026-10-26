@@ -120,7 +120,8 @@ Cada linha é o **título do plano** (`material/2026727_133027_Algebra Linear-Pl
 
 ## Estudo Dirigido
 - **ED1:** Aplicações de matrizes e sistemas de equações na área do curso — [notas](notas/ED1-aplicacoes-matrizes-e-sistemas-em-imagens.md)
-- **ED2:** Onde a computação usa autovalores (busca, imagens/dados, redes) — [notas](notas/ED2-aplicacoes-autovalores-pagerank.md) · [slides](notas/ED2-slides-copiar-colar.md) · [folha](notas/ED2-folha-calculo.md)
+- **ED2:** Onde a computação usa autovalores (busca, imagens/dados, redes) — [notas](notas/ED2-aplicacoes-autovalores-pagerank.md) · [slides](notas/ED2-slides-copiar-colar.md) · [folha](notas/ED2-folha-calculo.md) · [**app visual**](projetos/ed2-autovalores-app/)
+
 - Referência: STEINBRUCH; WINTERLE. *Álgebra linear*. Pearson, 2014.
 
 ## Trabalho de Nivelamento

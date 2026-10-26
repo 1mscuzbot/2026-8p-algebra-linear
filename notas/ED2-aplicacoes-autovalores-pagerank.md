@@ -15,11 +15,15 @@ No ED1 o objeto era o pixel: a imagem é uma matriz. Aqui o objeto é a direçã
 |---|---------|----------|
 | 1 | [ED2-slides-copiar-colar.md](ED2-slides-copiar-colar.md) | 5 slides para colar no PowerPoint |
 | 2 | [ED2-folha-calculo.md](ED2-folha-calculo.md) | A conta de uma área só (busca / PageRank), para treinar no papel |
-| 3 | [demo-autovalores-pagerank.py](../material/exercicios/demo-autovalores-pagerank.py) | Conferir o exemplo da busca |
+| 3 | [ed2-autovalores-app](../projetos/ed2-autovalores-app/) | **App visual** (abrir `index.html` na aula) |
+| 4 | [demo-autovalores-pagerank.py](../material/exercicios/demo-autovalores-pagerank.py) | Conferir o exemplo da busca no terminal |
 
 ```bash
-cd 2026-8p-algebra-linear/material/exercicios
-python3 demo-autovalores-pagerank.py
+# App (preferida na apresentação):
+xdg-open projetos/ed2-autovalores-app/index.html
+
+# Conferência no terminal:
+cd material/exercicios && python3 demo-autovalores-pagerank.py
 ```
 
 ---
@@ -31,10 +35,11 @@ python3 demo-autovalores-pagerank.py
 | 0:00–0:20 | Capa | “Onde a computação usa autovetor” |
 | 0:20–1:00 | A ideia | Av = λv: a direção não muda, λ estica ou encolhe |
 | 1:00–2:40 | Três áreas | Busca, imagens/dados, redes — uma frase cada |
-| 2:40–4:10 | Exemplo | PageRank: 3 páginas → pesos 4/9, 2/9, 1/3 |
+| 2:40–4:10 | Exemplo | PageRank na app: iterar → pesos 4/9, 2/9, 1/3 |
 | 4:10–4:40 | Fecho | Repetir as 3 áreas + Steinbruch |
 
-Se apertar: encurte a conta e não rode o Python. As três áreas não saem.
+Se apertar: vá direto à etapa 4 da app (vetor exato). As três áreas não saem.  
+Roteiro oral completo: [`projetos/ed2-autovalores-app/README.md`](../projetos/ed2-autovalores-app/README.md).
 
 ---
 

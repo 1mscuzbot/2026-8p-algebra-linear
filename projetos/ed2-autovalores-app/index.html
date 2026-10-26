@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ED2 — PageRank = Autovetor</title>
+  <style>
+    :root {
+      --bg: #0f1a24;
+      --panel: #172636;
+      --ink: #e8eef4;
+      --muted: #9bb0c3;
+      --accent: #3db8a0;
+      --accent-dim: #2a7f6e;
+      --a: #4ea1ff;
+      --b: #f0a34a;
+      --c: #e06b8a;
+      --line: #2c4258;
+      --ok: #7ddea0;
+      --font: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      --mono: "Cascadia Code", "Fira Code", Consolas, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 90% 60% at 10% -10%, #1c3a4f 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 100% 0%, #16352e 0%, transparent 45%),
+        var(--bg);
+      line-height: 1.35;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.5rem;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 1.1rem 1.5rem 0.8rem;
+      border-bottom: 1px solid var(--line);
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    header p {
+      margin: 0.2rem 0 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .brand {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .steps {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+    .steps button {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 0.45rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.85rem;
+    }
+    .steps button.active {
+      border-color: var(--accent);
+      background: #1d3f3a;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .steps button:hover { border-color: var(--muted); }
+
+    main {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 1rem;
+      padding: 1rem 1.5rem 1.5rem;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      main { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: color-mix(in srgb, var(--panel) 92%, black);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 1rem 1.1rem 1.15rem;
+      min-height: 0;
+    }
+    .card h2 {
+      margin: 0 0 0.55rem;
+      font-size: 1.05rem;
+    }
+    .hint {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin: 0 0 0.9rem;
+    }
+
+    .formula {
+      font-family: var(--mono);
+      font-size: clamp(1.2rem, 3vw, 1.7rem);
+      text-align: center;
+      padding: 0.9rem;
+      border-radius: 10px;
+      background: #12202c;
+      border: 1px dashed var(--accent-dim);
+      margin: 0.6rem 0 1rem;
+    }
+    .formula .lambda { color: var(--accent); }
+    .bullets { margin: 0; padding-left: 1.1rem; }
+    .bullets li { margin: 0.35rem 0; }
+
+    .viz {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1.15 / 1;
+      max-height: 420px;
+      background: #101c28;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    svg { width: 100%; height: 100%; display: block; }
+    .node circle {
+      stroke-width: 3;
+      transition: r 0.35s ease, filter 0.35s ease;
+    }
+    .node text {
+      font-family: var(--font);
+      font-weight: 700;
+      fill: #0b1218;
+      font-size: 18px;
+      text-anchor: middle;
+      dominant-baseline: central;
+      pointer-events: none;
+    }
+    .edge {
+      fill: none;
+      stroke: #6b849c;
+      stroke-width: 2.2;
+      marker-end: url(#arrow);
+      opacity: 0.85;
+    }
+    .edge.pulse { stroke: var(--accent); opacity: 1; }
+    .rank-label {
+      font-family: var(--mono);
+      font-size: 12px;
+      fill: var(--ink);
+      text-anchor: middle;
+    }
+
+    .bars { display: grid; gap: 0.55rem; margin-top: 0.7rem; }
+    .bar-row { display: grid; grid-template-columns: 28px 1fr 64px; gap: 0.55rem; align-items: center; }
+    .bar-row .name { font-weight: 700; }
+    .track {
+      height: 22px;
+      background: #0d1822;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .fill {
+      height: 100%;
+      width: 0%;
+      border-radius: inherit;
+      transition: width 0.45s ease;
+    }
+    .fill.A { background: linear-gradient(90deg, #2b6fb8, var(--a)); }
+    .fill.B { background: linear-gradient(90deg, #b06b1a, var(--b)); }
+    .fill.C { background: linear-gradient(90deg, #a13d58, var(--c)); }
+    .pct { font-family: var(--mono); font-size: 0.85rem; text-align: right; }
+
+    .matrix-wrap {
+      overflow-x: auto;
+      font-family: var(--mono);
+      font-size: 0.92rem;
+    }
+    table.mat {
+      border-collapse: collapse;
+      margin: 0.3rem auto;
+    }
+    table.mat th, table.mat td {
+      border: 1px solid var(--line);
+      padding: 0.4rem 0.65rem;
+      text-align: center;
+      min-width: 3.2rem;
+    }
+    table.mat th { color: var(--muted); font-weight: 600; background: #12202c; }
+    table.mat td.hl { background: #1c3a4f; color: var(--accent); }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 0.85rem 0 0.4rem;
+    }
+    .controls button, .ghost {
+      border: 1px solid var(--accent-dim);
+      background: var(--accent);
+      color: #062018;
+      font: inherit;
+      font-weight: 700;
+      padding: 0.55rem 0.9rem;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+    .controls button.secondary, .ghost {
+      background: transparent;
+      color: var(--ink);
+      border-color: var(--line);
+      font-weight: 600;
+    }
+    .controls button:disabled { opacity: 0.45; cursor: default; }
+
+    .status {
+      min-height: 1.4rem;
+      font-family: var(--mono);
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+    .status.ok { color: var(--ok); }
+
+    .check {
+      display: grid;
+      gap: 0.35rem;
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      background: #12202c;
+      border-radius: 10px;
+      padding: 0.75rem 0.85rem;
+      border: 1px solid var(--line);
+      margin-top: 0.7rem;
+    }
+
+    footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem 1.4rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    kbd {
+      font-family: var(--mono);
+      font-size: 0.78em;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0.05rem 0.35rem;
+      background: #12202c;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="brand">Álgebra Linear · ED2</div>
+      <h1>PageRank: o ranking é um autovetor</h1>
+      <p>3 páginas · matriz de links G · Gv = λv com λ = 1</p>
+    </div>
+    <nav class="steps" aria-label="Etapas da apresentação">
+      <button type="button" data-step="0" class="active">1. Ideia</button>
+      <button type="button" data-step="1">2. Grafo</button>
+      <button type="button" data-step="2">3. Iterar</button>
+      <button type="button" data-step="3">4. Conferir</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="card" id="left">
+      <!-- filled by JS -->
+    </section>
+    <aside class="card" id="right">
+      <!-- filled by JS -->
+    </aside>
+  </main>
+
+  <footer>
+    Exemplo das notas ED2 (A → B,C · B → A,C · C → A). Atalhos: <kbd>1</kbd>–<kbd>4</kbd> etapas ·
+    <kbd>Espaço</kbd> / <kbd>→</kbd> avançar · <kbd>←</kbd> voltar.
+    Steinbruch Cap. 6 · Brin &amp; Page, 1998.
+  </footer>
+
+  <script>
+    // Matriz Google do exemplo (colunas somam 1). Ordem A, B, C.
+    const G = [
+      [0,   0.5, 1],
+      [0.5, 0,   0],
+      [0.5, 0.5, 0],
+    ];
+    const EXACT = [4 / 9, 2 / 9, 1 / 3];
+    const NAMES = ["A", "B", "C"];
+    const COLORS = { A: "#4ea1ff", B: "#f0a34a", C: "#e06b8a" };
+
+    let step = 0;
+    let v = [1 / 3, 1 / 3, 1 / 3];
+    let iter = 0;
+    let animating = false;
+
+    const left = document.getElementById("left");
+    const right = document.getElementById("right");
+    const stepBtns = [...document.querySelectorAll(".steps button")];
+
+    function fmt(x, d = 3) {
+      return (Math.round(x * 10 ** d) / 10 ** d).toFixed(d);
+    }
+    function pct(x) {
+      return (100 * x).toFixed(1) + "%";
+    }
+    function matvec(A, x) {
+      return A.map((row) => row.reduce((s, aij, j) => s + aij * x[j], 0));
+    }
+    function normalize(x) {
+      const s = x.reduce((a, b) => a + b, 0);
+      return x.map((t) => t / s);
+    }
+    function almostEq(a, b, eps = 1e-9) {
+      return a.every((ai, i) => Math.abs(ai - b[i]) < eps);
+    }
+
+    function setStep(n) {
+      step = Math.max(0, Math.min(3, n));
+      stepBtns.forEach((b, i) => b.classList.toggle("active", i === step));
+      if (step < 2) {
+        v = [1 / 3, 1 / 3, 1 / 3];
+        iter = 0;
+      }
+      if (step === 3) {
+        v = EXACT.slice();
+        iter = "∞";
+      }
+      render();
+    }
+
+    function barsHTML(vec, title) {
+      return `
+        <h2>${title}</h2>
+        <div class="bars">
+          ${NAMES.map((name, i) => `
+            <div class="bar-row">
+              <div class="name" style="color:${COLORS[name]}">${name}</div>
+              <div class="track"><div class="fill ${name}" style="width:${Math.max(2, 100 * vec[i])}%"></div></div>
+              <div class="pct">${pct(vec[i])}</div>
+            </div>
+          `).join("")}
+        </div>`;
+    }
+
+    function graphSVG(vec) {
+      const pos = {
+        A: [120, 70],
+        B: [280, 70],
+        C: [200, 210],
+      };
+      const rBase = 28;
+      const rs = vec.map((w) => rBase + 42 * w);
+
+      // curved edges with mid control points
+      const edges = [
+        ["A", "B"], ["A", "C"],
+        ["B", "A"], ["B", "C"],
+        ["C", "A"],
+      ];
+
+      function path(from, to) {
+        const [x1, y1] = pos[from];
+        const [x2, y2] = pos[to];
+        const mx = (x1 + x2) / 2;
+        const my = (y1 + y2) / 2;
+        // slight bend so A↔B don't overlap
+        const dx = x2 - x1, dy = y2 - y1;
+        const nx = -dy * 0.12, ny = dx * 0.12;
+        const sign = from < to ? 1 : -1;
+        return `M ${x1} ${y1} Q ${mx + sign * nx} ${my + sign * ny} ${x2} ${y2}`;
+      }
+
+      return `
+        <div class="viz" aria-label="Grafo de três páginas">
+          <svg viewBox="0 0 400 290" role="img">
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+                markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b849c" />
+              </marker>
+            </defs>
+            ${edges.map(([f, t]) =>
+              `<path class="edge" d="${path(f, t)}" />`
+            ).join("")}
+            ${NAMES.map((name, i) => {
+              const [x, y] = pos[name];
+              const r = rs[i];
+              return `
+                <g class="node">
+                  <circle cx="${x}" cy="${y}" r="${r}" fill="${COLORS[name]}" stroke="#0b1218" />
+                  <text x="${x}" y="${y}">${name}</text>
+                  <text class="rank-label" x="${x}" y="${y + r + 16}">${pct(vec[i])}</text>
+                </g>`;
+            }).join("")}
+          </svg>
+        </div>`;
+    }
+
+    function matrixHTML() {
+      const labels = ["", "A", "B", "C"];
+      return `
+        <div class="matrix-wrap">
+          <table class="mat" aria-label="Matriz G">
+            <tr>${labels.map((h) => `<th>${h || "G"}</th>`).join("")}</tr>
+            ${G.map((row, i) => `
+              <tr>
+                <th>${NAMES[i]}</th>
+                ${row.map((x) => `<td>${x === 0.5 ? "1/2" : x}</td>`).join("")}
+              </tr>
+            `).join("")}
+          </table>
+        </div>
+        <p class="hint" style="margin-top:0.55rem">Cada coluna soma 1 → “quem sai de uma página redistribui 100% do peso”. Por isso λ = 1.</p>`;
+    }
+
+    async function powerStep(times = 1) {
+      if (animating) return;
+      animating = true;
+      const btn = document.getElementById("btn-iter");
+      const btnRun = document.getElementById("btn-run");
+      if (btn) btn.disabled = true;
+      if (btnRun) btnRun.disabled = true;
+
+      for (let t = 0; t < times; t++) {
+        v = normalize(matvec(G, v));
+        iter = (typeof iter === "number" ? iter : 0) + 1;
+        render();
+        await new Promise((r) => setTimeout(r, 420));
+        if (almostEq(v, EXACT, 1e-4)) break;
+      }
+
+      animating = false;
+      render();
+    }
+
+    function jumpExact() {
+      v = EXACT.slice();
+      iter = "exato";
+      render();
+    }
+
+    function renderIdea() {
+      left.innerHTML = `
+        <h2>Autovetor = direção que não muda</h2>
+        <p class="hint">Mesma ideia da Aula 10: a matriz pode girar o plano, mas em algumas direções só estica.</p>
+        <div class="formula">A<span style="opacity:.7"> </span><strong>v</strong> = <span class="lambda">λ</span><strong>v</strong></div>
+        <ul class="bullets">
+          <li><strong>v ≠ 0</strong> — a direção estável</li>
+          <li><strong>λ</strong> — estica (λ&gt;1), encolhe (0&lt;λ&lt;1) ou inverte (λ&lt;0)</li>
+          <li>No PageRank: <strong>λ = 1</strong> e <strong>v</strong> é o ranking das páginas</li>
+        </ul>`;
+      right.innerHTML = `
+        <h2>Onde a computação usa</h2>
+        <p class="hint">Três áreas — uma frase cada (slide 3).</p>
+        <ul class="bullets">
+          <li><strong>Busca</strong> — peso da página (PageRank)</li>
+          <li><strong>Imagens/dados</strong> — eixo principal (PCA / eigenfaces)</li>
+          <li><strong>Redes</strong> — importância do nó</li>
+        </ul>
+        <p class="hint" style="margin-top:1rem">Nesta demo: só a área de <strong>busca</strong>, com 3 páginas.</p>
+        <div class="controls">
+          <button type="button" onclick="setStep(1)">Ver o grafo →</button>
+        </div>`;
+    }
+
+    function renderGraph() {
+      left.innerHTML = `
+        <h2>Três páginas e os links</h2>
+        <p class="hint">A → B e C · B → A e C · C → só A. O tamanho do nó mostra o peso atual (ainda uniforme).</p>
+        ${graphSVG(v)}
+        <p class="hint" style="margin-top:0.7rem">Intuição: C manda tudo para A → A tende a ficar em 1º.</p>`;
+      right.innerHTML = `
+        <h2>Matriz de links G</h2>
+        ${matrixHTML()}
+        <div class="controls">
+          <button type="button" class="secondary" onclick="setStep(0)">← Ideia</button>
+          <button type="button" onclick="setStep(2)">Iterar PageRank →</button>
+        </div>`;
+    }
+
+    function renderIter() {
+      const close = almostEq(v, EXACT, 5e-3);
+      left.innerHTML = `
+        <h2>Iteração: v ← Gv (normalizado)</h2>
+        <p class="hint">Começa uniforme. Cada passo redistribui o “voto” pelos links — método da potência.</p>
+        ${graphSVG(v)}
+        <div class="controls">
+          <button type="button" id="btn-iter" onclick="powerStep(1)">1 passo</button>
+          <button type="button" id="btn-run" class="secondary" onclick="powerStep(12)">Rodar até estabilizar</button>
+          <button type="button" class="secondary" onclick="jumpExact()">Ir ao exato</button>
+        </div>
+        <div class="status ${close ? "ok" : ""}" id="status">
+          iteração ${iter} · ${close ? "próximo do autovetor exato ✓" : "ainda convergindo…"}
+        </div>`;
+      right.innerHTML = `
+        ${barsHTML(v, "Ranking atual")}
+        <p class="hint" style="margin-top:0.8rem">Alvo da folha: A = 4/9 ≈ 44,4% · C = 1/3 ≈ 33,3% · B = 2/9 ≈ 22,2%</p>
+        ${barsHTML(EXACT, "Alvo (folha ED2)")}
+        <div class="controls">
+          <button type="button" class="secondary" onclick="setStep(1)">← Grafo</button>
+          <button type="button" onclick="setStep(3)">Conferir Gv = v →</button>
+        </div>`;
+    }
+
+    function renderCheck() {
+      const gv = matvec(G, EXACT);
+      left.innerHTML = `
+        <h2>Conferência: Gv = v</h2>
+        <p class="hint">Mesma conta da aula: (G − I)v = 0 com λ = 1. O ranking é autovetor.</p>
+        ${graphSVG(EXACT)}
+        <div class="check">
+          <div>v  = (${fmt(EXACT[0], 4)}, ${fmt(EXACT[1], 4)}, ${fmt(EXACT[2], 4)})</div>
+          <div>Gv = (${fmt(gv[0], 4)}, ${fmt(gv[1], 4)}, ${fmt(gv[2], 4)})</div>
+          <div style="color:var(--ok)">Gv = v ? ${almostEq(gv, EXACT) ? "sim ✓" : "não"}</div>
+          <div>Ranking: <strong style="color:${COLORS.A}">A 4/9</strong> &gt;
+            <strong style="color:${COLORS.C}">C 1/3</strong> &gt;
+            <strong style="color:${COLORS.B}">B 2/9</strong></div>
+        </div>`;
+      right.innerHTML = `
+        <h2>Fecho (30 s)</h2>
+        <ul class="bullets">
+          <li>Autovetor = direção que a transformação não muda</li>
+          <li>Busca, imagens/dados e redes usam isso</li>
+          <li>No exemplo, o ranking da web <em>é</em> esse vetor</li>
+        </ul>
+        <p class="hint" style="margin-top:0.9rem">Bibliografia: Steinbruch Cap. 6 · Brin &amp; Page 1998 · Turk &amp; Pentland 1991 (eigenfaces).</p>
+        <div class="controls">
+          <button type="button" class="secondary" onclick="setStep(2)">← Iterar</button>
+          <button type="button" class="secondary" onclick="setStep(0)">Recomeçar</button>
+        </div>`;
+    }
+
+    function render() {
+      if (step === 0) renderIdea();
+      else if (step === 1) renderGraph();
+      else if (step === 2) renderIter();
+      else renderCheck();
+    }
+
+    stepBtns.forEach((b) => b.addEventListener("click", () => setStep(+b.dataset.step)));
+
+    document.addEventListener("keydown", (e) => {
+      if (e.target.matches("input, textarea")) return;
+      if (e.key >= "1" && e.key <= "4") setStep(+e.key - 1);
+      else if (e.key === "ArrowRight" || e.key === " ") {
+        e.preventDefault();
+        if (step === 2 && e.key === " ") powerStep(1);
+        else setStep(step + 1);
+      } else if (e.key === "ArrowLeft") setStep(step - 1);
+    });
+
+    // expose for inline handlers
+    window.setStep = setStep;
+    window.powerStep = powerStep;
+    window.jumpExact = jumpExact;
+
+    setStep(0);
+  </script>
+</body>
+</html>
