@@ -24,7 +24,7 @@ python3 -m http.server 8765
 
 Atalhos: `1`–`4` · `→` / `Espaço` · `←`.
 
-**Projetor:** tema claro, tipografia/botões grandes, palco **4:3** centralizado. Clique em **Tela cheia** (Fullscreen API) ou pressione **F11**.
+**Projetor:** tema claro, **CAIXA ALTA**, palco **4:3** sem scroll, percentuais do grafo em texto escuro. **Tela cheia** (botão) ou **F11**.
 
 ## Roteiro oral (~4–5 min)
 
