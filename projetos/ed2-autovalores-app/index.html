@@ -23,86 +23,106 @@
     }
 
     * { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
     body {
       font-family: var(--font);
       color: var(--ink);
       background: var(--bg);
-      line-height: 1.35;
+      line-height: 1.25;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 1.5vh 2vw;
+      padding: 1vh 1.5vw;
+      text-transform: uppercase;
     }
 
-    /* Palco ~4:3 centralizado (bordas laterais no widescreen do projetor) */
+    /* Palco 4:3 — cabe na viewport, sem scroll */
     .stage {
-      width: min(96vw, calc(96vh * 4 / 3), 980px);
-      max-height: 96vh;
-      aspect-ratio: 4 / 3;
+      width: min(98vw, calc(98vh * 4 / 3));
+      height: min(98vh, calc(98vw * 3 / 4));
+      max-width: 1100px;
+      max-height: 825px;
       background: var(--stage);
       border: 2px solid var(--line);
-      border-radius: 16px;
+      border-radius: 14px;
       box-shadow: 0 8px 28px rgba(21, 32, 43, 0.12);
       display: flex;
       flex-direction: column;
       overflow: hidden;
+      text-transform: uppercase;
     }
-    @media (max-aspect-ratio: 4/3) {
-      .stage {
-        width: min(96vw, 980px);
-        aspect-ratio: auto;
-        height: auto;
-        max-height: none;
-      }
+    :fullscreen body,
+    body:fullscreen {
+      padding: 0;
+      background: #000;
+    }
+    :fullscreen .stage,
+    body:fullscreen .stage {
+      width: min(100vw, calc(100vh * 4 / 3));
+      height: min(100vh, calc(100vw * 3 / 4));
+      max-width: none;
+      max-height: none;
+      border-radius: 0;
+      border-width: 0;
     }
 
     header {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem 1rem;
-      align-items: flex-end;
+      flex-wrap: nowrap;
+      gap: 0.5rem 0.75rem;
+      align-items: center;
       justify-content: space-between;
-      padding: 1rem 1.25rem 0.85rem;
+      padding: 0.55rem 0.85rem;
       border-bottom: 2px solid var(--line);
       background: var(--panel);
-      flex-shrink: 0;
+      flex: 0 0 auto;
     }
     header h1 {
       margin: 0;
-      font-size: clamp(1.45rem, 2.8vw, 1.95rem);
+      font-size: clamp(1.05rem, 2.1vh, 1.45rem);
       font-weight: 800;
-      letter-spacing: -0.01em;
+      letter-spacing: 0.02em;
     }
     header p {
-      margin: 0.25rem 0 0;
+      margin: 0.1rem 0 0;
       color: var(--muted);
-      font-size: clamp(0.95rem, 1.6vw, 1.15rem);
-      font-weight: 500;
+      font-size: clamp(0.7rem, 1.4vh, 0.9rem);
+      font-weight: 600;
     }
     .brand {
-      font-size: clamp(0.8rem, 1.3vw, 0.95rem);
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
+      font-size: clamp(0.65rem, 1.2vh, 0.8rem);
+      letter-spacing: 0.12em;
       color: var(--accent);
-      font-weight: 700;
+      font-weight: 800;
+    }
+    .header-actions {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0.4rem;
+      align-items: center;
+      flex-shrink: 0;
     }
 
     .steps {
       display: flex;
-      gap: 0.45rem;
-      flex-wrap: wrap;
+      gap: 0.3rem;
+      flex-wrap: nowrap;
     }
     .steps button {
       border: 2px solid var(--line);
       background: var(--panel);
       color: var(--ink);
-      padding: 0.65rem 0.95rem;
-      border-radius: 10px;
+      padding: 0.4rem 0.55rem;
+      border-radius: 8px;
       cursor: pointer;
       font: inherit;
-      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-      font-weight: 700;
+      font-size: clamp(0.72rem, 1.5vh, 0.92rem);
+      font-weight: 800;
+      text-transform: uppercase;
     }
     .steps button.active {
       border-color: var(--accent);
@@ -115,13 +135,14 @@
       border: 2px solid var(--accent);
       background: var(--accent);
       color: #ffffff;
-      padding: 0.75rem 1.15rem;
-      border-radius: 10px;
+      padding: 0.45rem 0.7rem;
+      border-radius: 8px;
       cursor: pointer;
       font: inherit;
-      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+      font-size: clamp(0.75rem, 1.55vh, 0.95rem);
       font-weight: 800;
       white-space: nowrap;
+      text-transform: uppercase;
     }
     .fs-btn:hover { filter: brightness(1.05); }
     .fs-btn.is-fs {
@@ -132,73 +153,75 @@
     main {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
-      gap: 0.85rem;
-      padding: 0.85rem 1.15rem 0.75rem;
-      flex: 1;
+      gap: 0.55rem;
+      padding: 0.55rem 0.75rem;
+      flex: 1 1 auto;
       min-height: 0;
-      overflow: auto;
-    }
-    @media (max-width: 720px) {
-      main { grid-template-columns: 1fr; }
+      overflow: hidden;
     }
 
     .card {
       background: var(--panel);
       border: 2px solid var(--line);
-      border-radius: 12px;
-      padding: 0.95rem 1.05rem 1.05rem;
+      border-radius: 10px;
+      padding: 0.55rem 0.7rem 0.65rem;
       min-height: 0;
-      overflow: auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .card h2 {
-      margin: 0 0 0.5rem;
-      font-size: clamp(1.2rem, 2.2vw, 1.45rem);
+      margin: 0 0 0.3rem;
+      font-size: clamp(0.95rem, 2vh, 1.2rem);
       font-weight: 800;
     }
     .hint {
       color: var(--muted);
-      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-      margin: 0 0 0.75rem;
-      font-weight: 500;
+      font-size: clamp(0.72rem, 1.45vh, 0.9rem);
+      margin: 0 0 0.4rem;
+      font-weight: 600;
     }
 
     .formula {
       font-family: var(--mono);
-      font-size: clamp(1.55rem, 3.2vw, 2.15rem);
-      font-weight: 700;
+      font-size: clamp(1.25rem, 3.2vh, 1.85rem);
+      font-weight: 800;
       text-align: center;
-      padding: 1rem;
-      border-radius: 12px;
+      padding: 0.55rem;
+      border-radius: 10px;
       background: var(--accent-soft);
       border: 2px dashed var(--accent);
-      margin: 0.55rem 0 0.9rem;
+      margin: 0.35rem 0 0.5rem;
       color: var(--ink);
+      text-transform: none; /* fórmula legível */
     }
     .formula .lambda { color: var(--accent); }
     .bullets {
       margin: 0;
-      padding-left: 1.25rem;
-      font-size: clamp(1.05rem, 1.7vw, 1.25rem);
+      padding-left: 1.1rem;
+      font-size: clamp(0.8rem, 1.7vh, 1.05rem);
+      font-weight: 600;
     }
-    .bullets li { margin: 0.45rem 0; }
+    .bullets li { margin: 0.25rem 0; }
 
     .viz {
       position: relative;
-      width: 100%;
+      width: min(100%, 42vh);
       aspect-ratio: 1 / 1;
-      max-height: min(38vh, 340px);
-      margin: 0 auto;
+      max-height: 34vh;
+      margin: 0.15rem auto;
       background: #eef3f7;
-      border-radius: 12px;
+      border-radius: 10px;
       border: 2px solid var(--line);
       overflow: hidden;
+      flex: 0 1 auto;
     }
     svg { width: 100%; height: 100%; display: block; }
     .node circle {
       stroke-width: 3;
       transition: r 0.35s ease;
     }
-    .node text {
+    .node-letter {
       font-family: var(--font);
       font-weight: 800;
       fill: #ffffff;
@@ -214,29 +237,34 @@
       marker-end: url(#arrow);
       opacity: 0.9;
     }
+    /* Percentuais: escuro + halo branco (não herdam fill branco do nó) */
     .rank-label {
       font-family: var(--mono);
-      font-size: 15px;
-      font-weight: 700;
-      fill: var(--ink);
+      font-size: 16px;
+      font-weight: 800;
+      fill: #15202b;
+      stroke: #ffffff;
+      stroke-width: 4px;
+      paint-order: stroke fill;
       text-anchor: middle;
+      pointer-events: none;
     }
 
-    .bars { display: grid; gap: 0.65rem; margin-top: 0.55rem; }
+    .bars { display: grid; gap: 0.35rem; margin-top: 0.25rem; }
     .bar-row {
       display: grid;
-      grid-template-columns: 36px 1fr 78px;
-      gap: 0.55rem;
+      grid-template-columns: 28px 1fr 64px;
+      gap: 0.4rem;
       align-items: center;
     }
     .bar-row .name {
       font-weight: 800;
-      font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+      font-size: clamp(0.9rem, 1.8vh, 1.1rem);
     }
     .track {
-      height: 32px;
+      height: 22px;
       background: #e4ebf1;
-      border-radius: 8px;
+      border-radius: 6px;
       overflow: hidden;
       border: 2px solid var(--line);
     }
@@ -251,26 +279,26 @@
     .fill.C { background: var(--c); }
     .pct {
       font-family: var(--mono);
-      font-size: clamp(1rem, 1.6vw, 1.15rem);
-      font-weight: 700;
+      font-size: clamp(0.8rem, 1.5vh, 0.95rem);
+      font-weight: 800;
       text-align: right;
+      color: var(--ink);
     }
 
     .matrix-wrap {
-      overflow-x: auto;
       font-family: var(--mono);
-      font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+      font-size: clamp(0.85rem, 1.7vh, 1.05rem);
     }
     table.mat {
       border-collapse: collapse;
-      margin: 0.3rem auto;
+      margin: 0.15rem auto;
     }
     table.mat th, table.mat td {
       border: 2px solid var(--line);
-      padding: 0.55rem 0.8rem;
+      padding: 0.3rem 0.5rem;
       text-align: center;
-      min-width: 3.6rem;
-      font-weight: 700;
+      min-width: 2.6rem;
+      font-weight: 800;
     }
     table.mat th {
       color: var(--muted);
@@ -280,8 +308,8 @@
     .controls {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.55rem;
-      margin: 0.85rem 0 0.35rem;
+      gap: 0.35rem;
+      margin: 0.4rem 0 0.15rem;
     }
     .controls button, .ghost {
       border: 2px solid var(--accent);
@@ -289,10 +317,11 @@
       color: #ffffff;
       font: inherit;
       font-weight: 800;
-      font-size: clamp(1rem, 1.6vw, 1.15rem);
-      padding: 0.7rem 1.05rem;
-      border-radius: 10px;
+      font-size: clamp(0.75rem, 1.5vh, 0.95rem);
+      padding: 0.4rem 0.7rem;
+      border-radius: 8px;
       cursor: pointer;
+      text-transform: uppercase;
     }
     .controls button.secondary, .ghost {
       background: var(--panel);
@@ -302,45 +331,49 @@
     .controls button:disabled { opacity: 0.45; cursor: default; }
 
     .status {
-      min-height: 1.5rem;
       font-family: var(--mono);
-      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-      font-weight: 700;
+      font-size: clamp(0.72rem, 1.4vh, 0.9rem);
+      font-weight: 800;
       color: var(--muted);
-      margin-top: 0.35rem;
+      margin-top: 0.2rem;
     }
     .status.ok { color: var(--ok); }
 
     .check {
       display: grid;
-      gap: 0.4rem;
+      gap: 0.2rem;
       font-family: var(--mono);
-      font-size: clamp(1rem, 1.6vw, 1.15rem);
-      font-weight: 700;
+      font-size: clamp(0.75rem, 1.5vh, 0.95rem);
+      font-weight: 800;
       background: #eef3f7;
-      border-radius: 10px;
-      padding: 0.85rem 0.95rem;
+      border-radius: 8px;
+      padding: 0.45rem 0.55rem;
       border: 2px solid var(--line);
-      margin-top: 0.65rem;
+      margin-top: 0.35rem;
+      text-transform: none;
     }
 
     footer {
-      padding: 0.55rem 1.25rem 0.75rem;
+      padding: 0.3rem 0.85rem;
       color: var(--muted);
-      font-size: clamp(0.8rem, 1.2vw, 0.95rem);
-      font-weight: 500;
+      font-size: clamp(0.62rem, 1.15vh, 0.78rem);
+      font-weight: 600;
       border-top: 2px solid var(--line);
       background: var(--panel);
-      flex-shrink: 0;
+      flex: 0 0 auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     kbd {
       font-family: var(--mono);
-      font-size: 0.9em;
+      font-size: 0.95em;
       border: 1px solid var(--line);
       border-radius: 4px;
-      padding: 0.05rem 0.35rem;
+      padding: 0.02rem 0.28rem;
       background: #eef3f7;
       color: var(--ink);
+      text-transform: none;
     }
   </style>
 </head>
@@ -352,7 +385,7 @@
       <h1>PageRank: o ranking é um autovetor</h1>
       <p>3 páginas · matriz de links G · Gv = λv com λ = 1</p>
     </div>
-    <div style="display:flex; flex-wrap:wrap; gap:0.55rem; align-items:center;">
+    <div class="header-actions">
       <nav class="steps" aria-label="Etapas da apresentação">
         <button type="button" data-step="0" class="active">1. Ideia</button>
         <button type="button" data-step="1">2. Grafo</button>
@@ -490,9 +523,9 @@
               return `
                 <g class="node">
                   <circle cx="${x}" cy="${y}" r="${r}" fill="${COLORS[name]}" stroke="#15202b" />
-                  <text x="${x}" y="${y}">${name}</text>
-                  <text class="rank-label" x="${x}" y="${y + r + 20}">${pct(vec[i])}</text>
-                </g>`;
+                  <text class="node-letter" x="${x}" y="${y}">${name}</text>
+                </g>
+                <text class="rank-label" x="${x}" y="${y + r + 22}">${pct(vec[i])}</text>`;
             }).join("")}
           </svg>
         </div>`;
@@ -512,7 +545,7 @@
             `).join("")}
           </table>
         </div>
-        <p class="hint" style="margin-top:0.55rem">Cada coluna soma 1 → “quem sai de uma página redistribui 100% do peso”. Por isso λ = 1.</p>`;
+        <p class="hint" style="margin-top:0.35rem">Colunas somam 1 → λ = 1.</p>`;
     }
 
     async function powerStep(times = 1) {
@@ -544,22 +577,22 @@
     function renderIdea() {
       left.innerHTML = `
         <h2>Autovetor = direção que não muda</h2>
-        <p class="hint">Mesma ideia da Aula 10: a matriz pode girar o plano, mas em algumas direções só estica.</p>
-        <div class="formula">A<span style="opacity:.7"> </span><strong>v</strong> = <span class="lambda">λ</span><strong>v</strong></div>
+        <p class="hint">Aula 10: a matriz estica só o tamanho nesta direção.</p>
+        <div class="formula">A <strong>v</strong> = <span class="lambda">λ</span><strong>v</strong></div>
         <ul class="bullets">
-          <li><strong>v ≠ 0</strong> — a direção estável</li>
-          <li><strong>λ</strong> — estica (λ&gt;1), encolhe (0&lt;λ&lt;1) ou inverte (λ&lt;0)</li>
-          <li>No PageRank: <strong>λ = 1</strong> e <strong>v</strong> é o ranking das páginas</li>
+          <li><strong>v ≠ 0</strong> — direção estável</li>
+          <li><strong>λ</strong> — estica / encolhe / inverte</li>
+          <li>PageRank: <strong>λ = 1</strong>, <strong>v</strong> = ranking</li>
         </ul>`;
       right.innerHTML = `
         <h2>Onde a computação usa</h2>
-        <p class="hint">Três áreas — uma frase cada (slide 3).</p>
+        <p class="hint">Três áreas — uma frase cada.</p>
         <ul class="bullets">
           <li><strong>Busca</strong> — peso da página (PageRank)</li>
-          <li><strong>Imagens/dados</strong> — eixo principal (PCA / eigenfaces)</li>
+          <li><strong>Imagens/dados</strong> — eixo principal (PCA)</li>
           <li><strong>Redes</strong> — importância do nó</li>
         </ul>
-        <p class="hint" style="margin-top:1rem">Nesta demo: só a área de <strong>busca</strong>, com 3 páginas.</p>
+        <p class="hint">Demo: só busca, 3 páginas.</p>
         <div class="controls">
           <button type="button" onclick="setStep(1)">Ver o grafo →</button>
         </div>`;
@@ -568,39 +601,39 @@
     function renderGraph() {
       left.innerHTML = `
         <h2>Três páginas e os links</h2>
-        <p class="hint">A → B e C · B → A e C · C → só A. O tamanho do nó mostra o peso atual (ainda uniforme).</p>
+        <p class="hint">A→B,C · B→A,C · C→A. Nó = peso (uniforme).</p>
         ${graphSVG(v)}
-        <p class="hint" style="margin-top:0.7rem">Intuição: C manda tudo para A → A tende a ficar em 1º.</p>`;
+        <p class="hint">C manda tudo para A → A sobe.</p>`;
       right.innerHTML = `
         <h2>Matriz de links G</h2>
         ${matrixHTML()}
         <div class="controls">
           <button type="button" class="secondary" onclick="setStep(0)">← Ideia</button>
-          <button type="button" onclick="setStep(2)">Iterar PageRank →</button>
+          <button type="button" onclick="setStep(2)">Iterar →</button>
         </div>`;
     }
 
     function renderIter() {
       const close = almostEq(v, EXACT, 5e-3);
       left.innerHTML = `
-        <h2>Iteração: v ← Gv (normalizado)</h2>
-        <p class="hint">Começa uniforme. Cada passo redistribui o “voto” pelos links — método da potência.</p>
+        <h2>Iteração: v ← Gv</h2>
+        <p class="hint">Cada passo redistribui o voto (método da potência).</p>
         ${graphSVG(v)}
         <div class="controls">
           <button type="button" id="btn-iter" onclick="powerStep(1)">1 passo</button>
-          <button type="button" id="btn-run" class="secondary" onclick="powerStep(12)">Rodar até estabilizar</button>
-          <button type="button" class="secondary" onclick="jumpExact()">Ir ao exato</button>
+          <button type="button" id="btn-run" class="secondary" onclick="powerStep(12)">Estabilizar</button>
+          <button type="button" class="secondary" onclick="jumpExact()">Exato</button>
         </div>
         <div class="status ${close ? "ok" : ""}" id="status">
-          iteração ${iter} · ${close ? "próximo do autovetor exato ✓" : "ainda convergindo…"}
+          iter ${iter} · ${close ? "próximo do exato ✓" : "convergindo…"}
         </div>`;
       right.innerHTML = `
         ${barsHTML(v, "Ranking atual")}
-        <p class="hint" style="margin-top:0.8rem">Alvo da folha: A = 4/9 ≈ 44,4% · C = 1/3 ≈ 33,3% · B = 2/9 ≈ 22,2%</p>
-        ${barsHTML(EXACT, "Alvo (folha ED2)")}
+        <p class="hint">Alvo: A 4/9 · C 1/3 · B 2/9</p>
+        ${barsHTML(EXACT, "Alvo (folha)")}
         <div class="controls">
           <button type="button" class="secondary" onclick="setStep(1)">← Grafo</button>
-          <button type="button" onclick="setStep(3)">Conferir Gv = v →</button>
+          <button type="button" onclick="setStep(3)">Conferir →</button>
         </div>`;
     }
 
@@ -608,7 +641,7 @@
       const gv = matvec(G, EXACT);
       left.innerHTML = `
         <h2>Conferência: Gv = v</h2>
-        <p class="hint">Mesma conta da aula: (G − I)v = 0 com λ = 1. O ranking é autovetor.</p>
+        <p class="hint">(G − I)v = 0 com λ = 1. Ranking = autovetor.</p>
         ${graphSVG(EXACT)}
         <div class="check">
           <div>v  = (${fmt(EXACT[0], 4)}, ${fmt(EXACT[1], 4)}, ${fmt(EXACT[2], 4)})</div>
@@ -621,11 +654,11 @@
       right.innerHTML = `
         <h2>Fecho (30 s)</h2>
         <ul class="bullets">
-          <li>Autovetor = direção que a transformação não muda</li>
-          <li>Busca, imagens/dados e redes usam isso</li>
-          <li>No exemplo, o ranking da web <em>é</em> esse vetor</li>
+          <li>Autovetor = direção que não muda</li>
+          <li>Busca, imagens/dados e redes</li>
+          <li>O ranking da web <em>é</em> esse vetor</li>
         </ul>
-        <p class="hint" style="margin-top:0.9rem">Bibliografia: Steinbruch Cap. 6 · Brin &amp; Page 1998 · Turk &amp; Pentland 1991 (eigenfaces).</p>
+        <p class="hint">Steinbruch Cap. 6 · Brin &amp; Page 1998</p>
         <div class="controls">
           <button type="button" class="secondary" onclick="setStep(2)">← Iterar</button>
           <button type="button" class="secondary" onclick="setStep(0)">Recomeçar</button>
