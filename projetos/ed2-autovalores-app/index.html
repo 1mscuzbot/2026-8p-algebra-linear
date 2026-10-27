@@ -55,19 +55,38 @@
       overflow: hidden;
       text-transform: uppercase;
     }
-    :fullscreen body,
-    body:fullscreen {
-      padding: 0;
-      background: #000;
+    /* Tela cheia: centraliza o palco 4:3 na viewport (não cola à esquerda) */
+    html:fullscreen,
+    html:-webkit-full-screen {
+      width: 100%;
+      height: 100%;
+      background: #111;
     }
-    :fullscreen .stage,
-    body:fullscreen .stage {
+    html:fullscreen body,
+    html:-webkit-full-screen body,
+    body:fullscreen,
+    body:-webkit-full-screen {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    html:fullscreen .stage,
+    html:-webkit-full-screen .stage,
+    body:fullscreen .stage,
+    body:-webkit-full-screen .stage {
       width: min(100vw, calc(100vh * 4 / 3));
       height: min(100vh, calc(100vw * 3 / 4));
       max-width: none;
       max-height: none;
+      margin: auto;
       border-radius: 0;
       border-width: 0;
+      flex-shrink: 0;
     }
 
     header {
@@ -690,7 +709,7 @@
           const exit = document.exitFullscreen || document.webkitExitFullscreen;
           if (exit) await exit.call(document);
         } else {
-          const el = document.documentElement;
+          const el = document.body;
           const req = el.requestFullscreen || el.webkitRequestFullscreen;
           if (req) await req.call(el);
           else alert("Fullscreen API indisponível — use F11.");
