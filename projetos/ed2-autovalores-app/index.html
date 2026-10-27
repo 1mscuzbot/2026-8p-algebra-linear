@@ -283,14 +283,15 @@
     }
     .rank-label {
       font-family: var(--mono);
-      font-size: 17px;
+      font-size: 13px;
       font-weight: 800;
       fill: #15202b;
       stroke: #ffffff;
-      stroke-width: 4px;
+      stroke-width: 3.5px;
       paint-order: stroke fill;
       text-anchor: middle;
       pointer-events: none;
+      letter-spacing: 0;
     }
 
     .bars {
@@ -335,10 +336,14 @@
     .fill.C { background: var(--c); }
     .pct {
       font-family: var(--mono);
-      font-size: clamp(1rem, 2.1vh, 1.25rem);
+      font-size: clamp(0.78rem, 1.7vh, 1.05rem);
       font-weight: 800;
       text-align: right;
       color: var(--ink);
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0;
+      text-transform: none;
     }
 
     .matrix-wrap {
@@ -502,7 +507,8 @@
       return (Math.round(x * 10 ** d) / 10 ** d).toFixed(d);
     }
     function pct(x) {
-      return (100 * x).toFixed(1) + "%";
+      // Muitas casas + vírgula BR: a mudança a cada iteração fica visível
+      return (100 * x).toFixed(6).replace(".", ",") + "%";
     }
     function matvec(A, x) {
       return A.map((row) => row.reduce((s, aij, j) => s + aij * x[j], 0));
