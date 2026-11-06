@@ -28,22 +28,20 @@ Atalhos: `1`–`4` · `→` / `Espaço` · `←`.
 
 ## Roteiro oral (~4–5 min)
 
+**Texto completo (etapas 1–4, pronúncia λ/Gv, exemplos A/B/C, verificação):** [`ROTEIRO.md`](./ROTEIRO.md)
+
 | Tempo | Etapa na app | O que falar |
 |------:|--------------|-------------|
 | 0:00–0:40 | **1. Ideia** | “No ED1 o pixel era matriz. Aqui: Av = λv — direção que não muda. Aplicação: PageRank.” |
 | 0:40–1:40 | **2. Grafo** | Ex.: A = Wikipedia, B = blog, C = portal de notícias. Mostrar G. “Colunas somam 1 → λ = 1. C manda tudo para A.” |
-| 1:40–3:40 | **3. Iterar** | Clicar **1 passo** 2–3× (ou **Rodar até estabilizar**). “v ← Gv: o peso flui pelos links.” Comparar com 4/9, 2/9, 1/3. |
+| 1:40–3:40 | **3. Iterar** | Clicar **1 passo** 2–3× (ou **Estabilizar**). “v ← Gv: o peso flui pelos links.” Comparar com 4/9, 2/9, 1/3. |
 | 3:40–4:40 | **4. Conferir** | “Gv = v. Ranking A > C > B.” Fechar: autovetor = direção que não muda; PageRank; ranking da web é esse vetor (λ = 1). |
 
 Se apertar o tempo: pule a iteração e vá direto à etapa 4 com o vetor exato.
 
 ## O que estudar antes
 
-1. Definição Av = λv (Aula 10) e ideia geométrica (estica / encolhe / inverte).
-2. Passo (A − λI)v = 0 da Aula 11 — no exemplo, λ = 1.
-3. Montar G a partir dos links (folha) e o ranking 4/9, 2/9, 1/3.
-4. Mensagem final: autovetor = direção que não muda; PageRank; ranking da web é esse vetor (λ = 1).
-5. Cronometrar a fala em voz alta com a app aberta (meta ≤ 5 min).
+Ver lista completa em [`ROTEIRO.md`](./ROTEIRO.md). Em resumo: Av = λv, (A − λI)v = 0 com λ = 1, ranking A 4/9 > C 1/3 > B 2/9, cronometrar ≤ 5 min com a app.
 
 ## Arquivos relacionados
 
