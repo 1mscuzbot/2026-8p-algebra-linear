@@ -42,7 +42,7 @@ Se apertar o tempo: pule a iteração e vá direto à etapa 4 com o vetor exato.
 1. Definição Av = λv (Aula 10) e ideia geométrica (estica / encolhe / inverte).
 2. Passo (A − λI)v = 0 da Aula 11 — no exemplo, λ = 1.
 3. Montar G a partir dos links (folha) e o ranking 4/9, 2/9, 1/3.
-4. Mensagem do fecho: autovetor = direção que não muda; PageRank; ranking da web é esse vetor (λ = 1).
+4. Mensagem final: autovetor = direção que não muda; PageRank; ranking da web é esse vetor (λ = 1).
 5. Cronometrar a fala em voz alta com a app aberta (meta ≤ 5 min).
 
 ## Arquivos relacionados
