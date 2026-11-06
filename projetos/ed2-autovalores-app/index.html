@@ -613,6 +613,7 @@
       const labels = ["", "A", "B", "C"];
       return `
         <div class="body-block">
+          <p class="hint" style="text-align:center">Ex.: A = Wikipedia · B = blog · C = portal de notícias</p>
           <div class="matrix-wrap">
             <table class="mat" aria-label="Matriz G">
               <tr>${labels.map((h) => `<th>${h || "G"}</th>`).join("")}</tr>
@@ -667,15 +668,14 @@
           </ul>
         </div>`;
       right.innerHTML = `
-        <h2>Onde a computação usa</h2>
-        <p class="hint">Três áreas — uma frase cada.</p>
+        <h2>Aplicação: PageRank</h2>
+        <p class="hint">Ranking da web = autovetor (λ = 1).</p>
         <div class="body-block">
           <ul class="bullets">
-            <li><strong>Busca</strong> — peso da página (PageRank)</li>
-            <li><strong>Imagens/dados</strong> — eixo principal (PCA)</li>
-            <li><strong>Redes</strong> — importância do nó</li>
+            <li>Links = votos entre páginas</li>
+            <li><strong>Gv = v</strong> — o ranking não muda</li>
+            <li>Demo: 3 páginas (A, B, C)</li>
           </ul>
-          <p class="hint">Demo: só busca, 3 páginas.</p>
         </div>
         <div class="controls">
           <button type="button" onclick="setStep(1)">Ver o grafo →</button>
@@ -736,11 +736,10 @@
             <strong style="color:${COLORS.B}">B 2/9</strong></div>
         </div>`;
       right.innerHTML = `
-        <h2>Fecho (30 s)</h2>
         <div class="body-block">
           <ul class="bullets">
             <li>Autovetor = direção que não muda</li>
-            <li>Busca, imagens/dados e redes</li>
+            <li>PageRank: <strong>Gv = v</strong> com λ = 1</li>
             <li>O ranking da web <em>é</em> esse vetor</li>
           </ul>
           <p class="hint">Steinbruch Cap. 6 · Brin &amp; Page 1998</p>

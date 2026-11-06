@@ -30,10 +30,10 @@ Atalhos: `1`–`4` · `→` / `Espaço` · `←`.
 
 | Tempo | Etapa na app | O que falar |
 |------:|--------------|-------------|
-| 0:00–0:40 | **1. Ideia** | “No ED1 o pixel era matriz. Aqui: Av = λv — direção que não muda. Três áreas: busca, imagens/dados, redes.” |
-| 0:40–1:40 | **2. Grafo** | Mostrar A/B/C e a matriz G. “Colunas somam 1 → λ = 1. C manda tudo para A.” |
+| 0:00–0:40 | **1. Ideia** | “No ED1 o pixel era matriz. Aqui: Av = λv — direção que não muda. Aplicação: PageRank.” |
+| 0:40–1:40 | **2. Grafo** | Ex.: A = Wikipedia, B = blog, C = portal de notícias. Mostrar G. “Colunas somam 1 → λ = 1. C manda tudo para A.” |
 | 1:40–3:40 | **3. Iterar** | Clicar **1 passo** 2–3× (ou **Rodar até estabilizar**). “v ← Gv: o peso flui pelos links.” Comparar com 4/9, 2/9, 1/3. |
-| 3:40–4:40 | **4. Conferir** | “Gv = v. Ranking A > C > B. Mesma conta da aula: (G − λI)v = 0.” Fechar com as 3 áreas + Steinbruch. |
+| 3:40–4:40 | **4. Conferir** | “Gv = v. Ranking A > C > B.” Fechar: autovetor = direção que não muda; PageRank; ranking da web é esse vetor (λ = 1). |
 
 Se apertar o tempo: pule a iteração e vá direto à etapa 4 com o vetor exato.
 
@@ -42,7 +42,7 @@ Se apertar o tempo: pule a iteração e vá direto à etapa 4 com o vetor exato.
 1. Definição Av = λv (Aula 10) e ideia geométrica (estica / encolhe / inverte).
 2. Passo (A − λI)v = 0 da Aula 11 — no exemplo, λ = 1.
 3. Montar G a partir dos links (folha) e o ranking 4/9, 2/9, 1/3.
-4. As três áreas em uma frase cada (busca / PCA-eigenfaces / redes).
+4. Mensagem final: autovetor = direção que não muda; PageRank; ranking da web é esse vetor (λ = 1).
 5. Cronometrar a fala em voz alta com a app aberta (meta ≤ 5 min).
 
 ## Arquivos relacionados
