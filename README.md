@@ -91,6 +91,7 @@ Cada linha é o **título do plano** (`material/2026727_133027_Algebra Linear-Pl
 | [aula07-dependencia-e-independencia-linear.md](notas/aula07-dependencia-e-independencia-linear.md) | LI/LD, base e dimensão — Tarefa 7 (p. 90, ex. 47–48 com respostas) |
 | [aula08-transformacoes-lineares.md](notas/aula08-transformacoes-lineares.md) | TL, definição + T(0) — Tarefa 8 (p. 211) |
 | [revisao-provinha-8-16out-transformacoes-lineares.md](notas/revisao-provinha-8-16out-transformacoes-lineares.md) | **Provinha 8 (16/10):** verificar linearidade + 4.8 do Steinbruch |
+| [refazer-provinhas-01out-e-16out.md](notas/refazer-provinhas-01out-e-16out.md) | **Refazer** faltas 01/10 (LI/LD) + 16/10 (P8): simulados + gabarito + checklist |
 | [revisao-provinha-09out-transformacoes-lineares.md](notas/revisao-provinha-09out-transformacoes-lineares.md) | *(antigo)* rascunho TL — redireciona para a Provinha 8 |
 | [aula09-propriedade-das-transformacoes-lineares.md](notas/aula09-propriedade-das-transformacoes-lineares.md) | Propriedades das TLs — Tarefa 9 (p. 214) · base da Provinha 9 |
 | [revisao-provinha-9-23out-propriedades-tl.md](notas/revisao-provinha-9-23out-propriedades-tl.md) | **Provinha 9 (23/10):** propriedades + T pela base (Steinbruch ~p. 214) |
